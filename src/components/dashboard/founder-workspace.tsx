@@ -2,9 +2,10 @@
 
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { CalendarDays, FileText, Layers, Mail, Network, Save, Search, Sparkles, Target, Upload, UserRound, X } from "lucide-react";
+import { CalendarDays, FileText, Layers, Mail, Network, Save, Search, Sparkles, Target, Upload, UserRound, UsersRound, X } from "lucide-react";
 
 import { ActiveCampaignSummary } from "@/components/dashboard/active-campaign-summary";
+import { AllContactsWindow } from "@/components/dashboard/all-contacts-window";
 import { DataImportPanel } from "@/components/dashboard/data-import-panel";
 import { DashboardHistory, type SavedDashboardSnapshot } from "@/components/dashboard/dashboard-history";
 import { DailyFocusQueue } from "@/components/dashboard/daily-focus-queue";
@@ -72,6 +73,7 @@ export function FounderWorkspace({
   const [saveStatus, setSaveStatus] = useState("No dashboard saved in this browser yet.");
   const [showImportPanel, setShowImportPanel] = useState(false);
   const [showGmailPanel, setShowGmailPanel] = useState(false);
+  const [showAllContactsWindow, setShowAllContactsWindow] = useState(false);
   const [importHistory, setImportHistory] = useState<ImportResult[]>([]);
   const [emailSyncResult, setEmailSyncResult] = useState<EmailSyncResult | null>(null);
   const [contactSearchQuery, setContactSearchQuery] = useState("");
@@ -279,6 +281,13 @@ export function FounderWorkspace({
     setActiveView("dashboard");
     setContactSearchQuery("");
     setIsContactSearchFocused(false);
+  }, []);
+
+  const handleSelectAllContact = useCallback((personId: string) => {
+    setSelectedPersonId(personId);
+    setSelectedPodId("all");
+    setActiveView("dashboard");
+    setShowAllContactsWindow(false);
   }, []);
 
   const handleTogglePlanned = useCallback((personId: string) => {
@@ -489,6 +498,19 @@ export function FounderWorkspace({
                 </button>
                 <button
                   type="button"
+                  onClick={() => setShowAllContactsWindow(true)}
+                  className={cn(
+                    "inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition",
+                    showAllContactsWindow
+                      ? "bg-[#f4c95d] text-[#11100d]"
+                      : "border border-white/10 bg-white/[0.04] text-[#e7dfd0] hover:bg-white/10",
+                  )}
+                >
+                  <UsersRound className="h-4 w-4" aria-hidden="true" />
+                  All contacts
+                </button>
+                <button
+                  type="button"
                   onClick={() => setShowImportPanel((current) => !current)}
                   className={cn(
                     "inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition",
@@ -651,6 +673,17 @@ export function FounderWorkspace({
             onClose={() => setShowGmailPanel(false)}
             onSynced={handleGmailSynced}
             people={workspacePeople}
+          />
+        )}
+
+        {showAllContactsWindow && (
+          <AllContactsWindow
+            campaigns={workspaceCampaigns}
+            onClose={() => setShowAllContactsWindow(false)}
+            onSelectPerson={handleSelectAllContact}
+            people={workspacePeople}
+            pods={pods}
+            selectedPersonId={selectedPerson?.id ?? ""}
           />
         )}
 

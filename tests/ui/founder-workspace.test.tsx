@@ -44,6 +44,7 @@ describe("FounderWorkspace", () => {
     expect(screen.getAllByRole("button", { name: /May 11, 2026/ }).length).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "Report" })).toHaveAttribute("href", "/report");
     expect(screen.getByRole("button", { name: "Save dashboard" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "All contacts" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Dashboard report" })).not.toBeInTheDocument();
   });
 
@@ -78,6 +79,26 @@ describe("FounderWorkspace", () => {
 
     expect(screen.getByRole("heading", { name: "Marcus Reed" })).toBeInTheDocument();
     expect(screen.getAllByText(/Cloudlane/).length).toBeGreaterThan(0);
+  });
+
+  it("opens all saved contacts in a searchable window", async () => {
+    const user = userEvent.setup();
+    await renderWorkspace();
+
+    await user.click(screen.getByRole("button", { name: "All contacts" }));
+
+    expect(screen.getByRole("heading", { name: "All contacts" })).toBeInTheDocument();
+    expect(screen.getByText("14 saved contacts in the active relationship system.")).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText("Search all contacts"), "Maya");
+    await user.click(screen.getByRole("button", { name: "Search" }));
+
+    expect(screen.getByText(/Showing \d+ of 14 contacts for "Maya"\./)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Open Maya Chen from all contacts" }));
+
+    expect(screen.queryByRole("heading", { name: "All contacts" })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Maya Chen" })).toBeInTheDocument();
+    expect(screen.getAllByText(/Meridian Ventures/).length).toBeGreaterThan(0);
   });
 
   it("selects a daily focus card from anywhere on the card", async () => {
