@@ -459,31 +459,31 @@ export function FounderWorkspace({
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#11100d] px-3 py-4 text-[#f8f6f0] sm:px-5 lg:px-6">
+    <main className="app-shell min-h-screen px-3 py-4 text-[#ffffff] sm:px-5 lg:px-6">
       <div className="mx-auto flex w-full max-w-[1760px] flex-col gap-4">
         <header className="glass-surface rounded-lg p-4">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#6ee7b7] text-[#11100d]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#2fb65d] text-[#001426]">
                   <Sparkles className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-semibold tracking-normal text-[#fffaf0] sm:text-2xl">Real Deal</h1>
-                  <p className="mt-1 text-sm text-[#c9c1ad]">{founder.operatingFocus}</p>
+                  <h1 className="text-xl font-semibold tracking-normal text-[#ffffff] sm:text-2xl">Real Deal</h1>
+                  <p className="mt-1 text-sm text-[#a8bdd0]">{founder.operatingFocus}</p>
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-[#e7dfd0]">
-                <UserRound className="h-4 w-4 text-[#f4c95d]" aria-hidden="true" />
+              <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-[#edf7ff]">
+                <UserRound className="h-4 w-4 text-[#2fb65d]" aria-hidden="true" />
                 <span className="truncate">
                   {founder.name}, {founder.company}
                 </span>
               </div>
-              <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-[#e7dfd0]">
-                <CalendarDays className="h-4 w-4 text-[#7dd3fc]" aria-hidden="true" />
+              <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-[#edf7ff]">
+                <CalendarDays className="h-4 w-4 text-[#79c7ff]" aria-hidden="true" />
                 <time dateTime={generatedAt}>{formatLongDate(generatedAt)}</time>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -491,7 +491,7 @@ export function FounderWorkspace({
                   href="/report"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-[#6ee7b7]/35 bg-[#6ee7b7]/10 px-3 py-2 text-sm font-semibold text-[#d1fae5] transition hover:bg-[#6ee7b7]/20"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-[#2fb65d]/35 bg-[#2fb65d]/10 px-3 py-2 text-sm font-semibold text-[#dfffe8] transition hover:bg-[#2fb65d]/20"
                 >
                   <FileText className="h-4 w-4" aria-hidden="true" />
                   Report
@@ -499,7 +499,7 @@ export function FounderWorkspace({
                 <button
                   type="button"
                   onClick={handleSaveDashboard}
-                  className="inline-flex items-center justify-center gap-2 rounded-md bg-[#f8f6f0] px-3 py-2 text-sm font-semibold text-[#11100d] transition hover:bg-white"
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-[#ffffff] px-3 py-2 text-sm font-semibold text-[#001426] transition hover:bg-white"
                 >
                   <Save className="h-4 w-4" aria-hidden="true" />
                   Save dashboard
@@ -510,8 +510,8 @@ export function FounderWorkspace({
                   className={cn(
                     "inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition",
                     showGmailPanel
-                      ? "bg-[#7dd3fc] text-[#11100d]"
-                      : "border border-white/10 bg-white/[0.04] text-[#e7dfd0] hover:bg-white/10",
+                      ? "bg-[#79c7ff] text-[#001426]"
+                      : "border border-white/10 bg-white/[0.04] text-[#edf7ff] hover:bg-white/10",
                   )}
                 >
                   <Mail className="h-4 w-4" aria-hidden="true" />
@@ -523,8 +523,8 @@ export function FounderWorkspace({
                   className={cn(
                     "inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition",
                     showAllContactsWindow
-                      ? "bg-[#f4c95d] text-[#11100d]"
-                      : "border border-white/10 bg-white/[0.04] text-[#e7dfd0] hover:bg-white/10",
+                      ? "bg-[#00477f] text-white"
+                      : "border border-white/10 bg-white/[0.04] text-[#edf7ff] hover:bg-white/10",
                   )}
                 >
                   <UsersRound className="h-4 w-4" aria-hidden="true" />
@@ -536,8 +536,8 @@ export function FounderWorkspace({
                   className={cn(
                     "inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition",
                     showImportPanel
-                      ? "bg-[#6ee7b7] text-[#11100d]"
-                      : "border border-white/10 bg-white/[0.04] text-[#e7dfd0] hover:bg-white/10",
+                      ? "bg-[#2fb65d] text-[#001426]"
+                      : "border border-white/10 bg-white/[0.04] text-[#edf7ff] hover:bg-white/10",
                   )}
                 >
                   <Upload className="h-4 w-4" aria-hidden="true" />
@@ -546,7 +546,7 @@ export function FounderWorkspace({
               </div>
             </div>
           </div>
-          <p className="mt-3 text-xs text-[#c9c1ad]" role="status">
+          <p className="mt-3 text-xs text-[#a8bdd0]" role="status">
             {saveStatus}
           </p>
 
@@ -565,7 +565,7 @@ export function FounderWorkspace({
               }}
             >
               <Search
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7dd3fc]"
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#79c7ff]"
                 aria-hidden="true"
               />
               <input
@@ -591,7 +591,7 @@ export function FounderWorkspace({
                 aria-controls="contact-search-results"
                 autoComplete="off"
                 placeholder="Search contacts by name, company, role, tag, or email"
-                className="h-11 w-full rounded-md border border-white/10 bg-white/[0.05] px-10 pr-11 text-sm text-[#fffaf0] outline-none transition placeholder:text-[#8f8878] focus:border-[#6ee7b7]/50 focus:bg-white/[0.07] focus:ring-2 focus:ring-[#6ee7b7]/20"
+                className="h-11 w-full rounded-md border border-white/10 bg-white/[0.05] px-10 pr-11 text-sm text-[#ffffff] outline-none transition placeholder:text-[#7fa0b8] focus:border-[#2fb65d]/50 focus:bg-white/[0.07] focus:ring-2 focus:ring-[#2fb65d]/20"
               />
               {contactSearchQuery && (
                 <button
@@ -603,7 +603,7 @@ export function FounderWorkspace({
                     setContactSearchQuery("");
                     setIsContactSearchFocused(false);
                   }}
-                  className="absolute right-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-[#c9c1ad] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+                  className="absolute right-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-[#a8bdd0] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
                 >
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
@@ -611,7 +611,7 @@ export function FounderWorkspace({
               {shouldShowContactSearchResults && (
                 <div
                   id="contact-search-results"
-                  className="absolute left-0 right-0 top-full z-30 mt-2 max-h-80 overflow-y-auto rounded-md border border-white/10 bg-[#1d1b17] p-2 shadow-2xl"
+                  className="absolute left-0 right-0 top-full z-30 mt-2 max-h-80 overflow-y-auto rounded-md border border-white/10 bg-[#031d35] p-2 shadow-2xl"
                 >
                   {contactSearchResults.length > 0 ? (
                     <div className="flex flex-col gap-1">
@@ -625,18 +625,18 @@ export function FounderWorkspace({
                             aria-label={`Select ${person.name} from search`}
                             onMouseDown={(event) => event.preventDefault()}
                             onClick={() => handleSelectSearchResult(person.id)}
-                            className="flex w-full items-start justify-between gap-3 rounded-md px-3 py-2 text-left transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+                            className="flex w-full items-start justify-between gap-3 rounded-md px-3 py-2 text-left transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
                           >
                             <span className="min-w-0">
-                              <span className="block truncate text-sm font-semibold text-[#fffaf0]">{person.name}</span>
-                              <span className="mt-0.5 block truncate text-xs text-[#c9c1ad]">
+                              <span className="block truncate text-sm font-semibold text-[#ffffff]">{person.name}</span>
+                              <span className="mt-0.5 block truncate text-xs text-[#a8bdd0]">
                                 {person.role}, {person.company}
                               </span>
-                              <span className="mt-1 block truncate text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">
+                              <span className="mt-1 block truncate text-[11px] font-semibold uppercase tracking-[0.12em] text-[#79c7ff]">
                                 {podName} - {person.ring} ring
                               </span>
                             </span>
-                            <span className="shrink-0 rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#d1fae5]">
+                            <span className="shrink-0 rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#dfffe8]">
                               {person.socialEquityScore.total}
                             </span>
                           </button>
@@ -644,7 +644,7 @@ export function FounderWorkspace({
                       })}
                     </div>
                   ) : (
-                    <div className="rounded-md border border-dashed border-white/10 bg-white/[0.03] px-3 py-4 text-sm text-[#c9c1ad]">
+                    <div className="rounded-md border border-dashed border-white/10 bg-white/[0.03] px-3 py-4 text-sm text-[#a8bdd0]">
                       No contacts found. Try a name, company, role, tag, or email.
                     </div>
                   )}
@@ -666,8 +666,8 @@ export function FounderWorkspace({
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold transition",
                     isSelected
-                      ? "border-[#6ee7b7]/50 bg-[#6ee7b7]/15 text-[#d1fae5]"
-                      : "border-white/10 text-[#c9c1ad] hover:bg-white/10 hover:text-white",
+                      ? "border-[#2fb65d]/50 bg-[#2fb65d]/15 text-[#dfffe8]"
+                      : "border-white/10 text-[#a8bdd0] hover:bg-white/10 hover:text-white",
                   )}
                 >
                   <Icon className="h-4 w-4" aria-hidden="true" />

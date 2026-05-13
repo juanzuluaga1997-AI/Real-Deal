@@ -156,7 +156,7 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#c9c1ad] transition hover:bg-white/10 hover:text-white"
+          className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#a8bdd0] transition hover:bg-white/10 hover:text-white"
         >
           <X className="h-3.5 w-3.5" aria-hidden="true" />
           Close
@@ -166,7 +166,7 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
       <div className="grid gap-4 xl:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)]">
         <div className="space-y-4">
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <label htmlFor="import-method" className="block text-xs font-medium uppercase tracking-[0.16em] text-[#c9c1ad]">
+            <label htmlFor="import-method" className="block text-xs font-medium uppercase tracking-[0.16em] text-[#a8bdd0]">
               Import method
             </label>
             <select
@@ -176,7 +176,7 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                 setImportMode(event.target.value as ImportMode);
                 setStatus({ state: "idle", message: "Choose an import method to add founder relationship data." });
               }}
-              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm font-semibold text-[#fffaf0]"
+              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm font-semibold text-[#ffffff]"
             >
               {importModeOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -184,18 +184,18 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                 </option>
               ))}
             </select>
-            <p className="mt-2 text-sm leading-6 text-[#c9c1ad]">
+            <p className="mt-2 text-sm leading-6 text-[#a8bdd0]">
               {importModeOptions.find((option) => option.value === importMode)?.description}
             </p>
           </div>
 
           {importMode === "file" && (
             <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <div className="flex items-center gap-2 text-sm font-semibold text-[#fffaf0]">
-              <FileSpreadsheet className="h-4 w-4 text-[#6ee7b7]" aria-hidden="true" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-[#ffffff]">
+              <FileSpreadsheet className="h-4 w-4 text-[#2fb65d]" aria-hidden="true" />
               Upload a document
             </div>
-            <p className="mt-2 text-sm leading-6 text-[#c9c1ad]">
+            <p className="mt-2 text-sm leading-6 text-[#a8bdd0]">
               Built for 1,000+ row CSV and Excel uploads. The importer normalizes fields, merges duplicates, assigns pods,
               detects campaigns, creates initial relationship scores, and adds imported contacts to the active relationship system.
             </p>
@@ -210,7 +210,7 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={status.state === "reading"}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#f8f6f0] px-4 py-3 text-sm font-semibold text-[#11100d] transition hover:bg-white disabled:bg-white/20 disabled:text-[#c9c1ad]"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#ffffff] px-4 py-3 text-sm font-semibold text-[#001426] transition hover:bg-white disabled:bg-white/20 disabled:text-[#a8bdd0]"
             >
               <Upload className="h-4 w-4" aria-hidden="true" />
               Choose file
@@ -220,11 +220,11 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
 
           {importMode === "google" && (
             <form onSubmit={handleGoogleImport} className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <div className="flex items-center gap-2 text-sm font-semibold text-[#fffaf0]">
-              <Link2 className="h-4 w-4 text-[#7dd3fc]" aria-hidden="true" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-[#ffffff]">
+              <Link2 className="h-4 w-4 text-[#79c7ff]" aria-hidden="true" />
               Import from Google
             </div>
-            <label htmlFor="google-document-url" className="mt-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#c9c1ad]">
+            <label htmlFor="google-document-url" className="mt-3 block text-xs font-medium uppercase tracking-[0.16em] text-[#a8bdd0]">
               Public Google link
             </label>
             <input
@@ -233,17 +233,17 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
               value={googleUrl}
               onChange={(event) => setGoogleUrl(event.target.value)}
               placeholder="https://docs.google.com/spreadsheets/d/..."
-              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0] placeholder:text-[#776d5f]"
+              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff] placeholder:text-[#7fa0b8]"
             />
             <button
               type="submit"
               disabled={status.state === "reading" || !googleUrl.trim()}
-              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#6ee7b7] px-4 py-3 text-sm font-semibold text-[#11100d] transition hover:bg-[#a9fff0] disabled:bg-white/20 disabled:text-[#c9c1ad]"
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#2fb65d] px-4 py-3 text-sm font-semibold text-[#001426] transition hover:bg-[#7fe6a0] disabled:bg-white/20 disabled:text-[#a8bdd0]"
             >
               <Link2 className="h-4 w-4" aria-hidden="true" />
               Import Google document
             </button>
-            <p className="mt-3 text-xs leading-5 text-[#c9c1ad]">
+            <p className="mt-3 text-xs leading-5 text-[#a8bdd0]">
               Public Google Sheets, Docs, Slides, and Drive file links are supported. Private Google files require a
               future OAuth connection.
             </p>
@@ -252,50 +252,50 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
 
           {importMode === "manual" && (
             <form onSubmit={handleManualImport} className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-              <div className="flex items-center gap-2 text-sm font-semibold text-[#fffaf0]">
-                <UserPlus className="h-4 w-4 text-[#6ee7b7]" aria-hidden="true" />
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#ffffff]">
+                <UserPlus className="h-4 w-4 text-[#2fb65d]" aria-hidden="true" />
                 Add contact manually
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Name
                   <input
                     name="name"
                     required
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Morgan Lee"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Email
                   <input
                     name="email"
                     type="email"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="morgan@example.com"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Company
                   <input
                     name="company"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Harbor Fund"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Role
                   <input
                     name="role"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Partner"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Relationship type
                   <select
                     name="relationshipType"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                   >
                     <option value="">Select relationship type</option>
                     <option value="Investor">Investor</option>
@@ -309,19 +309,19 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                     <option value="CEO">CEO</option>
                   </select>
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Last interaction date
                   <input
                     name="lastInteractionDate"
                     type="date"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Campaign
                   <select
                     name="campaign"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                   >
                     <option value="">Select active campaign</option>
                     {activeCampaignOptions.map((campaign) => (
@@ -331,12 +331,12 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                     ))}
                   </select>
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Importance level
                   <select
                     name="importanceLevel"
                     defaultValue="8"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                   >
                     <option value="10">10 - Critical</option>
                     <option value="9">9 - Very high</option>
@@ -348,63 +348,63 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                     <option value="3">3 - Low</option>
                   </select>
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Responsiveness
                   <input
                     name="responsiveness"
                     type="number"
                     min="0"
                     max="100"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="85"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0]">
+                <label className="block text-sm text-[#edf7ff]">
                   Source
                   <input
                     name="source"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Warm intro"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0] sm:col-span-2">
+                <label className="block text-sm text-[#edf7ff] sm:col-span-2">
                   Phone
                   <input
                     name="phone"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="555-010-0199"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0] sm:col-span-2">
+                <label className="block text-sm text-[#edf7ff] sm:col-span-2">
                   Tags
                   <input
                     name="tags"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Series A, lead investor path"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0] sm:col-span-2">
+                <label className="block text-sm text-[#edf7ff] sm:col-span-2">
                   Intro history
                   <input
                     name="introHistory"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Introduced by Maya Chen"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0] sm:col-span-2">
+                <label className="block text-sm text-[#edf7ff] sm:col-span-2">
                   Follow-up commitment
                   <input
                     name="followUpCommitment"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Send the revised metrics memo"
                   />
                 </label>
-                <label className="block text-sm text-[#e7dfd0] sm:col-span-2">
+                <label className="block text-sm text-[#edf7ff] sm:col-span-2">
                   Notes
                   <textarea
                     name="notes"
                     rows={4}
-                    className="mt-1 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                    className="mt-1 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                     placeholder="Context, history, and what makes this relationship important"
                   />
                 </label>
@@ -412,7 +412,7 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
               <button
                 type="submit"
                 disabled={status.state === "reading"}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#6ee7b7] px-4 py-3 text-sm font-semibold text-[#11100d] transition hover:bg-[#a9fff0] disabled:bg-white/20 disabled:text-[#c9c1ad]"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#2fb65d] px-4 py-3 text-sm font-semibold text-[#001426] transition hover:bg-[#7fe6a0] disabled:bg-white/20 disabled:text-[#a8bdd0]"
               >
                 <UserPlus className="h-4 w-4" aria-hidden="true" />
                 Add contact
@@ -424,10 +424,10 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
             className={cn(
               "rounded-lg border p-3 text-sm leading-6",
               status.state === "success"
-                ? "border-[#6ee7b7]/30 bg-[#6ee7b7]/10 text-[#bbf7d0]"
+                ? "border-[#2fb65d]/30 bg-[#2fb65d]/10 text-[#bcf5ca]"
                 : status.state === "error"
-                  ? "border-[#fb7185]/35 bg-[#fb7185]/10 text-[#fecdd3]"
-                  : "border-white/10 bg-white/[0.035] text-[#c9c1ad]",
+                  ? "border-[#e96f80]/35 bg-[#e96f80]/10 text-[#ffd9df]"
+                  : "border-white/10 bg-white/[0.035] text-[#a8bdd0]",
             )}
             role={status.state === "error" ? "alert" : "status"}
           >
@@ -439,12 +439,12 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-[#fffaf0]">Import summary</p>
-                <p className="mt-1 text-xs text-[#c9c1ad]">
+                <p className="text-sm font-semibold text-[#ffffff]">Import summary</p>
+                <p className="mt-1 text-xs text-[#a8bdd0]">
                   {latestImport ? `${getSummary(latestImport).totalRowsProcessed} rows from ${latestImport.sourceName}` : "No import parsed yet"}
                 </p>
               </div>
-              <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">
+              <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">
                 {latestImport?.sourceType ?? "idle"}
               </span>
             </div>
@@ -477,11 +477,11 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
 
                     return (
                       <div key={metric.label} className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                        <div className="flex items-center gap-2 text-xs text-[#c9c1ad]">
-                          <Icon className="h-3.5 w-3.5 text-[#a9fff0]" aria-hidden="true" />
+                        <div className="flex items-center gap-2 text-xs text-[#a8bdd0]">
+                          <Icon className="h-3.5 w-3.5 text-[#7fe6a0]" aria-hidden="true" />
                           {metric.label}
                         </div>
-                        <p className="mt-2 font-mono text-xl font-semibold text-[#fffaf0]">{metric.value}</p>
+                        <p className="mt-2 font-mono text-xl font-semibold text-[#ffffff]">{metric.value}</p>
                       </div>
                     );
                   })}
@@ -489,16 +489,16 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
 
                 <div className="mt-4 grid gap-3 lg:grid-cols-2">
                   <div className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#c9c1ad]">
-                      <Sparkles className="h-3.5 w-3.5 text-[#f4c95d]" aria-hidden="true" />
+                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#a8bdd0]">
+                      <Sparkles className="h-3.5 w-3.5 text-[#f4bd45]" aria-hidden="true" />
                       Campaigns detected
                     </div>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {getSummary(latestImport).campaignsDetected.length === 0 ? (
-                        <span className="text-sm text-[#c9c1ad]">No campaigns detected</span>
+                        <span className="text-sm text-[#a8bdd0]">No campaigns detected</span>
                       ) : (
                         getSummary(latestImport).campaignsDetected.map((campaign) => (
-                          <span key={campaign} className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">
+                          <span key={campaign} className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">
                             {campaign}
                           </span>
                         ))
@@ -507,13 +507,13 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                   </div>
 
                   <div className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#c9c1ad]">
-                      <Network className="h-3.5 w-3.5 text-[#7dd3fc]" aria-hidden="true" />
+                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#a8bdd0]">
+                      <Network className="h-3.5 w-3.5 text-[#79c7ff]" aria-hidden="true" />
                       Pods assigned
                     </div>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {getSummary(latestImport).podsAssigned.map((pod) => (
-                        <span key={pod.podId} className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">
+                        <span key={pod.podId} className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">
                           {pod.podName}: {pod.count}
                         </span>
                       ))}
@@ -522,15 +522,15 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                 </div>
               </>
             ) : (
-              <div className="mt-4 rounded-md border border-dashed border-white/15 bg-white/[0.03] p-4 text-sm leading-6 text-[#c9c1ad]">
+              <div className="mt-4 rounded-md border border-dashed border-white/15 bg-white/[0.03] p-4 text-sm leading-6 text-[#a8bdd0]">
                 Imported contacts will be normalized, deduplicated, scored, and added to the active relationship system.
               </div>
             )}
           </div>
 
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <p className="text-sm font-semibold text-[#fffaf0]">Prioritized contact preview</p>
-            <p className="mt-1 text-xs text-[#c9c1ad]">
+            <p className="text-sm font-semibold text-[#ffffff]">Prioritized contact preview</p>
+            <p className="mt-1 text-xs text-[#a8bdd0]">
               {latestImport ? "Sorted by initial relationship score" : "No scored contacts yet"}
             </p>
             {latestImport ? (
@@ -539,33 +539,33 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                   <article key={contact.id} className="rounded-md border border-white/10 bg-white/[0.04] p-3">
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-[#fffaf0]">{contact.name}</p>
-                        <p className="mt-1 text-xs text-[#c9c1ad]">
+                        <p className="truncate text-sm font-semibold text-[#ffffff]">{contact.name}</p>
+                        <p className="mt-1 text-xs text-[#a8bdd0]">
                           {[contact.role, contact.company].filter(Boolean).join(", ") || "No role or company detected"}
                         </p>
                       </div>
-                      <span className="rounded-md bg-[#6ee7b7]/15 px-2 py-1 font-mono text-xs font-semibold text-[#a9fff0]">
+                      <span className="rounded-md bg-[#2fb65d]/15 px-2 py-1 font-mono text-xs font-semibold text-[#7fe6a0]">
                         {contact.initialSocialEquityScore}
                       </span>
                     </div>
                     <div className="mt-2 flex flex-wrap gap-2">
-                      <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">{contact.podName}</span>
-                      <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">{contact.ring} ring</span>
+                      <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">{contact.podName}</span>
+                      <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">{contact.ring} ring</span>
                       {contact.status === "review" && (
-                        <span className="rounded-md bg-[#fb7185]/15 px-2 py-1 text-xs text-[#fecdd3]">Needs review</span>
+                        <span className="rounded-md bg-[#e96f80]/15 px-2 py-1 text-xs text-[#ffd9df]">Needs review</span>
                       )}
                     </div>
                     {(contact.email || contact.phone) && (
-                      <p className="mt-2 truncate text-xs text-[#a9fff0]">{[contact.email, contact.phone].filter(Boolean).join(" | ")}</p>
+                      <p className="mt-2 truncate text-xs text-[#7fe6a0]">{[contact.email, contact.phone].filter(Boolean).join(" | ")}</p>
                     )}
                     {contact.campaignNames.length > 0 && (
-                      <p className="mt-2 text-xs text-[#f4c95d]">Campaign: {contact.campaignNames.slice(0, 2).join(", ")}</p>
+                      <p className="mt-2 text-xs text-[#f4bd45]">Campaign: {contact.campaignNames.slice(0, 2).join(", ")}</p>
                     )}
                   </article>
                 ))}
               </div>
             ) : (
-              <div className="mt-4 rounded-md border border-dashed border-white/15 bg-white/[0.03] p-4 text-sm leading-6 text-[#c9c1ad]">
+              <div className="mt-4 rounded-md border border-dashed border-white/15 bg-white/[0.03] p-4 text-sm leading-6 text-[#a8bdd0]">
                 High-signal imported contacts will appear here first.
               </div>
             )}
@@ -574,8 +574,8 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-[#fffaf0]">Import history</p>
-                <p className="mt-1 text-xs text-[#c9c1ad]">{importHistory.length} imported document snapshots</p>
+                <p className="text-sm font-semibold text-[#ffffff]">Import history</p>
+                <p className="mt-1 text-xs text-[#a8bdd0]">{importHistory.length} imported document snapshots</p>
               </div>
               {importHistory.length > 0 && (
                 <button
@@ -584,7 +584,7 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
                     setLatestSubmittedImport(null);
                     onClearHistory();
                   }}
-                  className="rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#c9c1ad] transition hover:bg-white/10 hover:text-white"
+                  className="rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#a8bdd0] transition hover:bg-white/10 hover:text-white"
                 >
                   Clear
                 </button>
@@ -592,14 +592,14 @@ export function DataImportPanel({ campaigns, importHistory, onImported, onClearH
             </div>
             <div className="contained-scroll mt-4 max-h-[220px] space-y-2 overflow-y-auto pr-2">
               {importHistory.length === 0 ? (
-                <p className="rounded-md border border-dashed border-white/15 bg-white/[0.03] p-3 text-sm text-[#c9c1ad]">
+                <p className="rounded-md border border-dashed border-white/15 bg-white/[0.03] p-3 text-sm text-[#a8bdd0]">
                   No imported documents yet.
                 </p>
               ) : (
                 importHistory.map((result) => (
                   <div key={`${result.sourceName}-${result.parsedAt}`} className="rounded-md bg-white/[0.04] p-3">
-                    <p className="truncate text-sm font-semibold text-[#fffaf0]">{result.sourceName}</p>
-                    <p className="mt-1 text-xs text-[#c9c1ad]">
+                    <p className="truncate text-sm font-semibold text-[#ffffff]">{result.sourceName}</p>
+                    <p className="mt-1 text-xs text-[#a8bdd0]">
                       {getSummary(result).contactsImported} contacts | {getSummary(result).duplicatesMerged} duplicates merged
                     </p>
                   </div>

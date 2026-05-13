@@ -19,10 +19,10 @@ function RelationshipHealthOverviewComponent({ people, campaigns }: Relationship
   const activeCampaigns = campaigns.filter((campaign) => campaign.status === "active").length;
 
   const stats = [
-    { label: "Inner circle", value: innerCircleCount, icon: ShieldCheck, tone: "text-[#6ee7b7]" },
-    { label: "At risk", value: atRiskCount, icon: TrendingDown, tone: "text-[#fb7185]" },
-    { label: "Active campaigns", value: activeCampaigns, icon: Activity, tone: "text-[#f4c95d]" },
-    { label: "Tracked people", value: people.length, icon: Users, tone: "text-[#7dd3fc]" },
+    { label: "Inner circle", value: innerCircleCount, icon: ShieldCheck, tone: "text-[#2fb65d]" },
+    { label: "At risk", value: atRiskCount, icon: TrendingDown, tone: "text-[#e96f80]" },
+    { label: "Active campaigns", value: activeCampaigns, icon: Activity, tone: "text-[#f4bd45]" },
+    { label: "Tracked people", value: people.length, icon: Users, tone: "text-[#79c7ff]" },
   ];
 
   return (
@@ -32,8 +32,8 @@ function RelationshipHealthOverviewComponent({ people, campaigns }: Relationship
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-lg border border-white/10 bg-white/[0.035] p-3">
             <stat.icon className={`mb-3 h-4 w-4 ${stat.tone}`} aria-hidden="true" />
-            <p className="font-mono text-2xl font-semibold text-[#fffaf0]">{stat.value}</p>
-            <p className="mt-1 text-xs text-[#c9c1ad]">{stat.label}</p>
+            <p className="font-mono text-2xl font-semibold text-[#ffffff]">{stat.value}</p>
+            <p className="mt-1 text-xs text-[#a8bdd0]">{stat.label}</p>
           </div>
         ))}
       </div>

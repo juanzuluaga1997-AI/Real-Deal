@@ -133,7 +133,7 @@ export function GmailSyncPanel({ people, latestSync, onClose, onSynced }: GmailS
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#c9c1ad] transition hover:bg-white/10 hover:text-white"
+          className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#a8bdd0] transition hover:bg-white/10 hover:text-white"
         >
           <X className="h-3.5 w-3.5" aria-hidden="true" />
           Close
@@ -144,52 +144,52 @@ export function GmailSyncPanel({ people, latestSync, onClose, onSynced }: GmailS
         <div className="space-y-4">
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-[#fffaf0]">
+              <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-[#ffffff]">
                 {gmailStatus?.configured ? (
-                  <CheckCircle2 className="h-4 w-4 text-[#6ee7b7]" aria-hidden="true" />
+                  <CheckCircle2 className="h-4 w-4 text-[#2fb65d]" aria-hidden="true" />
                 ) : (
-                  <AlertTriangle className="h-4 w-4 text-[#f4c95d]" aria-hidden="true" />
+                  <AlertTriangle className="h-4 w-4 text-[#f4bd45]" aria-hidden="true" />
                 )}
                 {formatSyncMode(gmailStatus)}
               </span>
-              <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-[#e7dfd0]">
-                <ShieldCheck className="h-4 w-4 text-[#7dd3fc]" aria-hidden="true" />
+              <span className="inline-flex items-center gap-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-[#edf7ff]">
+                <ShieldCheck className="h-4 w-4 text-[#79c7ff]" aria-hidden="true" />
                 Read-only access
               </span>
             </div>
-            <p className="mt-3 text-sm leading-6 text-[#c9c1ad]">
+            <p className="mt-3 text-sm leading-6 text-[#a8bdd0]">
               Account identity is authorized through Google at runtime and is not stored in source code.
             </p>
             {gmailStatus?.configured && (
-              <p className="mt-3 rounded-md border border-[#6ee7b7]/25 bg-[#6ee7b7]/10 p-3 text-sm leading-6 text-[#bbf7d0]">
+              <p className="mt-3 rounded-md border border-[#2fb65d]/25 bg-[#2fb65d]/10 p-3 text-sm leading-6 text-[#bcf5ca]">
                 Gmail is connected with read-only access. The connection is stored in {formatTokenStorage(gmailStatus)}.
               </p>
             )}
             {gmailStatus && !gmailStatus.configured && gmailStatus.canConnect && (
               <a
                 href={gmailStatus.connectUrl}
-                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#7dd3fc] px-4 py-3 text-sm font-semibold text-[#11100d] transition hover:bg-[#bae6fd]"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#79c7ff] px-4 py-3 text-sm font-semibold text-[#001426] transition hover:bg-[#d8efff]"
               >
                 <KeyRound className="h-4 w-4" aria-hidden="true" />
                 Connect Gmail
               </a>
             )}
             {gmailStatus && gmailStatus.missingFields.length > 0 && (
-              <p className="mt-3 rounded-md border border-[#f4c95d]/30 bg-[#f4c95d]/10 p-3 text-sm leading-6 text-[#f9e6a2]">
+              <p className="mt-3 rounded-md border border-[#f4bd45]/30 bg-[#f4bd45]/10 p-3 text-sm leading-6 text-[#ffe4a0]">
                 Missing setup: {gmailStatus.missingFields.join(", ")}. Demo sync will run until Gmail OAuth setup is complete.
               </p>
             )}
           </div>
 
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <label htmlFor="gmail-lookback-days" className="block text-xs font-medium uppercase tracking-[0.16em] text-[#c9c1ad]">
+            <label htmlFor="gmail-lookback-days" className="block text-xs font-medium uppercase tracking-[0.16em] text-[#a8bdd0]">
               Email lookback
             </label>
             <select
               id="gmail-lookback-days"
               value={lookbackDays}
               onChange={(event) => setLookbackDays(event.target.value)}
-              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm font-semibold text-[#fffaf0]"
+              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm font-semibold text-[#ffffff]"
             >
               <option value="0">All available email</option>
               <option value="30">Last 30 days</option>
@@ -201,7 +201,7 @@ export function GmailSyncPanel({ people, latestSync, onClose, onSynced }: GmailS
               type="button"
               onClick={handleSync}
               disabled={syncStatus.state === "loading"}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#6ee7b7] px-4 py-3 text-sm font-semibold text-[#11100d] transition hover:bg-[#a9fff0] disabled:bg-white/20 disabled:text-[#c9c1ad]"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#2fb65d] px-4 py-3 text-sm font-semibold text-[#001426] transition hover:bg-[#7fe6a0] disabled:bg-white/20 disabled:text-[#a8bdd0]"
             >
               <RefreshCw className={cn("h-4 w-4", syncStatus.state === "loading" && "animate-spin")} aria-hidden="true" />
               Run sync
@@ -210,10 +210,10 @@ export function GmailSyncPanel({ people, latestSync, onClose, onSynced }: GmailS
               className={cn(
                 "mt-3 rounded-lg border p-3 text-sm leading-6",
                 syncStatus.state === "success"
-                  ? "border-[#6ee7b7]/30 bg-[#6ee7b7]/10 text-[#bbf7d0]"
+                  ? "border-[#2fb65d]/30 bg-[#2fb65d]/10 text-[#bcf5ca]"
                   : syncStatus.state === "error"
-                    ? "border-[#fb7185]/35 bg-[#fb7185]/10 text-[#fecdd3]"
-                    : "border-white/10 bg-white/[0.035] text-[#c9c1ad]",
+                    ? "border-[#e96f80]/35 bg-[#e96f80]/10 text-[#ffd9df]"
+                    : "border-white/10 bg-white/[0.035] text-[#a8bdd0]",
               )}
               role={syncStatus.state === "error" ? "alert" : "status"}
             >
@@ -224,32 +224,32 @@ export function GmailSyncPanel({ people, latestSync, onClose, onSynced }: GmailS
 
         <div className="space-y-4">
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <p className="text-sm font-semibold text-[#fffaf0]">Sync summary</p>
+            <p className="text-sm font-semibold text-[#ffffff]">Sync summary</p>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
               <div className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                <p className="text-xs text-[#c9c1ad]">Tracked relationships</p>
-                <p className="mt-2 font-mono text-xl font-semibold text-[#fffaf0]">{contactTargets.length}</p>
+                <p className="text-xs text-[#a8bdd0]">Tracked relationships</p>
+                <p className="mt-2 font-mono text-xl font-semibold text-[#ffffff]">{contactTargets.length}</p>
               </div>
               <div className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                <p className="text-xs text-[#c9c1ad]">Emails imported</p>
-                <p className="mt-2 font-mono text-xl font-semibold text-[#fffaf0]">{latestSync?.summary.messagesImported ?? 0}</p>
+                <p className="text-xs text-[#a8bdd0]">Emails imported</p>
+                <p className="mt-2 font-mono text-xl font-semibold text-[#ffffff]">{latestSync?.summary.messagesImported ?? 0}</p>
               </div>
               <div className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                <p className="text-xs text-[#c9c1ad]">Matched relationships</p>
-                <p className="mt-2 font-mono text-xl font-semibold text-[#fffaf0]">{latestSync?.summary.matchedContacts ?? 0}</p>
+                <p className="text-xs text-[#a8bdd0]">Matched relationships</p>
+                <p className="mt-2 font-mono text-xl font-semibold text-[#ffffff]">{latestSync?.summary.matchedContacts ?? 0}</p>
               </div>
               <div className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                <p className="text-xs text-[#c9c1ad]">Mode</p>
-                <p className="mt-2 text-sm font-semibold text-[#fffaf0]">{latestSync?.summary.mode ?? gmailStatus?.mode ?? "checking"}</p>
+                <p className="text-xs text-[#a8bdd0]">Mode</p>
+                <p className="mt-2 text-sm font-semibold text-[#ffffff]">{latestSync?.summary.mode ?? gmailStatus?.mode ?? "checking"}</p>
               </div>
             </div>
           </div>
 
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <p className="text-sm font-semibold text-[#fffaf0]">Recent Gmail evidence</p>
+            <p className="text-sm font-semibold text-[#ffffff]">Recent Gmail evidence</p>
             <div className="contained-scroll mt-4 max-h-[260px] space-y-2 overflow-y-auto pr-2">
               {!latestSync || latestSync.events.length === 0 ? (
-                <p className="rounded-md border border-dashed border-white/15 bg-white/[0.03] p-3 text-sm text-[#c9c1ad]">
+                <p className="rounded-md border border-dashed border-white/15 bg-white/[0.03] p-3 text-sm text-[#a8bdd0]">
                   Gmail email history will appear here after a sync.
                 </p>
               ) : (
@@ -259,11 +259,11 @@ export function GmailSyncPanel({ people, latestSync, onClose, onSynced }: GmailS
                   return (
                     <article key={event.id} className="rounded-md border border-white/10 bg-white/[0.04] p-3">
                       <div className="flex items-center justify-between gap-3">
-                        <p className="truncate text-sm font-semibold text-[#fffaf0]">{person?.name ?? "Matched contact"}</p>
-                        <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">{event.direction}</span>
+                        <p className="truncate text-sm font-semibold text-[#ffffff]">{person?.name ?? "Matched contact"}</p>
+                        <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">{event.direction}</span>
                       </div>
-                      <p className="mt-2 truncate text-sm text-[#d8d2c3]">{event.subject}</p>
-                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#c9c1ad]">{event.snippet}</p>
+                      <p className="mt-2 truncate text-sm text-[#c8d8e6]">{event.subject}</p>
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-[#a8bdd0]">{event.snippet}</p>
                     </article>
                   );
                 })

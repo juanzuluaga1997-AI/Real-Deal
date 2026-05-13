@@ -18,15 +18,15 @@ export function Panel({ title, eyebrow, icon: Icon, action, children, className 
       {(title || eyebrow || action || Icon) && (
         <div className="mb-4 flex items-start justify-between gap-4">
           <div className="min-w-0">
-            {eyebrow && <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a9fff0]">{eyebrow}</p>}
+            {eyebrow && <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#7fe6a0]">{eyebrow}</p>}
             {title && (
               <div className="mt-1 flex min-w-0 items-center gap-2">
                 {Icon && (
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/10 text-[#f4c95d]">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/10 text-[#2fb65d]">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
                 )}
-                <h2 className="truncate text-base font-semibold text-[#fffaf0]">{title}</h2>
+                <h2 className="truncate text-base font-semibold text-[#ffffff]">{title}</h2>
               </div>
             )}
           </div>

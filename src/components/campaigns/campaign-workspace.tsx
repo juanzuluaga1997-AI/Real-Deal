@@ -174,16 +174,16 @@ export function CampaignWorkspace({
                     onClick={() => onSelectCampaign(campaign.id)}
                     className={cn(
                       "w-full rounded-lg border p-3 text-left transition",
-                      isSelected ? "border-[#f4c95d]/50 bg-[#f4c95d]/10" : "border-white/10 bg-white/[0.035] hover:bg-white/[0.06]",
+                      isSelected ? "border-[#f4bd45]/50 bg-[#f4bd45]/10" : "border-white/10 bg-white/[0.035] hover:bg-white/[0.06]",
                     )}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-white/10 text-[#f4c95d]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-white/10 text-[#f4bd45]">
                         <Icon className="h-4 w-4" aria-hidden="true" />
                       </span>
                       <span className="min-w-0">
-                        <span className="block truncate text-sm font-semibold text-[#fffaf0]">{campaign.title}</span>
-                        <span className="mt-1 block text-xs text-[#c9c1ad]">{formatCampaignType(campaign.type)}</span>
+                        <span className="block truncate text-sm font-semibold text-[#ffffff]">{campaign.title}</span>
+                        <span className="mt-1 block text-xs text-[#a8bdd0]">{formatCampaignType(campaign.type)}</span>
                       </span>
                     </div>
                   </button>
@@ -195,24 +195,24 @@ export function CampaignWorkspace({
 
         <Panel eyebrow="Create" icon={Plus} title="Create campaign">
           <form onSubmit={handleSubmitCampaign} className="space-y-3">
-            <label className="block text-sm text-[#e7dfd0]">
+            <label className="block text-sm text-[#edf7ff]">
               Campaign title
               <input
                 id="manual-campaign-title"
                 name="title"
                 required
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 placeholder="Advisor Network Sprint"
               />
             </label>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-              <label className="block text-sm text-[#e7dfd0]">
+              <label className="block text-sm text-[#edf7ff]">
                 Campaign type
                 <select
                   id="manual-campaign-type"
                   name="type"
                   defaultValue="partnership"
-                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 >
                   {campaignTypeOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -221,13 +221,13 @@ export function CampaignWorkspace({
                   ))}
                 </select>
               </label>
-              <label className="block text-sm text-[#e7dfd0]">
+              <label className="block text-sm text-[#edf7ff]">
                 Status
                 <select
                   id="manual-campaign-status"
                   name="status"
                   defaultValue="active"
-                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 >
                   {campaignStatusOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -237,61 +237,61 @@ export function CampaignWorkspace({
                 </select>
               </label>
             </div>
-            <label className="block text-sm text-[#e7dfd0]">
+            <label className="block text-sm text-[#edf7ff]">
               Due date
               <input
                 id="manual-campaign-due-date"
                 name="dueDate"
                 type="date"
                 defaultValue={getInitialDueDate()}
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
               />
             </label>
-            <label className="block text-sm text-[#e7dfd0]">
+            <label className="block text-sm text-[#edf7ff]">
               Stage
               <input
                 id="manual-campaign-stage"
                 name="stage"
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 placeholder="Relationship activation"
               />
             </label>
-            <label className="block text-sm text-[#e7dfd0]">
+            <label className="block text-sm text-[#edf7ff]">
               Objective
               <textarea
                 id="manual-campaign-objective"
                 name="objective"
                 rows={3}
-                className="mt-1 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                className="mt-1 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 placeholder="Coordinate the relationships needed for this company priority."
               />
             </label>
-            <label className="block text-sm text-[#e7dfd0]">
+            <label className="block text-sm text-[#edf7ff]">
               Next action
               <input
                 id="manual-campaign-next-action"
                 name="nextAction"
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 placeholder="Send tailored asks to selected contacts"
               />
             </label>
-            <label className="block text-sm text-[#e7dfd0]">
+            <label className="block text-sm text-[#edf7ff]">
               Owner
               <input
                 id="manual-campaign-owner"
                 name="owner"
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-3 py-2 text-sm text-[#fffaf0]"
+                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-3 py-2 text-sm text-[#ffffff]"
                 placeholder="Avery Hart"
               />
             </label>
 
             <div className="rounded-lg border border-white/10 bg-white/[0.035] p-3">
-              <label htmlFor="campaign-contact-search" className="block text-sm font-semibold text-[#fffaf0]">
+              <label htmlFor="campaign-contact-search" className="block text-sm font-semibold text-[#ffffff]">
                 Search contacts to add
               </label>
               <div className="relative mt-2">
                 <Search
-                  className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7dd3fc]"
+                  className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#79c7ff]"
                   aria-hidden="true"
                 />
                 <input
@@ -300,13 +300,13 @@ export function CampaignWorkspace({
                   value={targetSearchQuery}
                   onChange={(event) => setTargetSearchQuery(event.target.value)}
                   placeholder="Find contacts to add"
-                  className="min-h-11 w-full rounded-md border border-white/10 bg-[#11100d] px-10 py-2 text-sm text-[#fffaf0] placeholder:text-[#776d5f]"
+                  className="min-h-11 w-full rounded-md border border-white/10 bg-[#001426] px-10 py-2 text-sm text-[#ffffff] placeholder:text-[#7fa0b8]"
                 />
               </div>
               {targetSearchQuery.trim() && (
                 <div className="mt-2 max-h-56 space-y-1 overflow-y-auto pr-1">
                   {targetSearchResults.length === 0 ? (
-                    <p className="rounded-md border border-dashed border-white/10 p-3 text-sm text-[#c9c1ad]">No contacts found.</p>
+                    <p className="rounded-md border border-dashed border-white/10 p-3 text-sm text-[#a8bdd0]">No contacts found.</p>
                   ) : (
                     targetSearchResults.map((person) => (
                       <button
@@ -317,12 +317,12 @@ export function CampaignWorkspace({
                         className="flex w-full items-start justify-between gap-3 rounded-md border border-white/10 bg-white/[0.04] p-3 text-left transition hover:bg-white/10"
                       >
                         <span className="min-w-0">
-                          <span className="block truncate text-sm font-semibold text-[#fffaf0]">{person.name}</span>
-                          <span className="mt-1 block truncate text-xs text-[#c9c1ad]">
+                          <span className="block truncate text-sm font-semibold text-[#ffffff]">{person.name}</span>
+                          <span className="mt-1 block truncate text-xs text-[#a8bdd0]">
                             {person.role}, {person.company}
                           </span>
                         </span>
-                        <span className="rounded-md bg-[#6ee7b7]/15 px-2 py-1 font-mono text-xs text-[#a9fff0]">
+                        <span className="rounded-md bg-[#2fb65d]/15 px-2 py-1 font-mono text-xs text-[#7fe6a0]">
                           {person.socialEquityScore.total}
                         </span>
                       </button>
@@ -332,19 +332,19 @@ export function CampaignWorkspace({
               )}
               <div className="mt-3 flex flex-wrap gap-2">
                 {selectedTargetPeople.length === 0 ? (
-                  <span className="text-sm text-[#c9c1ad]">No contacts added yet.</span>
+                  <span className="text-sm text-[#a8bdd0]">No contacts added yet.</span>
                 ) : (
                   selectedTargetPeople.map((person) => (
                     <span
                       key={person.id}
-                      className="inline-flex max-w-full items-center gap-2 rounded-md border border-white/10 bg-white/[0.06] px-2 py-1 text-xs text-[#e7dfd0]"
+                      className="inline-flex max-w-full items-center gap-2 rounded-md border border-white/10 bg-white/[0.06] px-2 py-1 text-xs text-[#edf7ff]"
                     >
                       <span className="truncate">{person.name}</span>
                       <button
                         type="button"
                         aria-label={`Remove ${person.name} from campaign`}
                         onClick={() => handleRemoveTargetPerson(person.id)}
-                        className="text-[#c9c1ad] hover:text-white"
+                        className="text-[#a8bdd0] hover:text-white"
                       >
                         <X className="h-3.5 w-3.5" aria-hidden="true" />
                       </button>
@@ -359,8 +359,8 @@ export function CampaignWorkspace({
                 className={cn(
                   "rounded-md border p-3 text-sm",
                   formStatus.includes("created")
-                    ? "border-[#6ee7b7]/30 bg-[#6ee7b7]/10 text-[#bbf7d0]"
-                    : "border-[#fb7185]/35 bg-[#fb7185]/10 text-[#fecdd3]",
+                    ? "border-[#2fb65d]/30 bg-[#2fb65d]/10 text-[#bcf5ca]"
+                    : "border-[#e96f80]/35 bg-[#e96f80]/10 text-[#ffd9df]",
                 )}
                 role={formStatus.includes("created") ? "status" : "alert"}
               >
@@ -369,7 +369,7 @@ export function CampaignWorkspace({
             )}
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#6ee7b7] px-4 py-3 text-sm font-semibold text-[#11100d] transition hover:bg-[#a9fff0]"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#2fb65d] px-4 py-3 text-sm font-semibold text-[#001426] transition hover:bg-[#7fe6a0]"
             >
               <Plus className="h-4 w-4" aria-hidden="true" />
               Create campaign
@@ -415,7 +415,7 @@ function CampaignDetailPanel({
           <button
             type="button"
             onClick={() => onDeleteCampaign(campaign.id)}
-            className="inline-flex items-center gap-2 rounded-md border border-[#fb7185]/35 bg-[#fb7185]/10 px-3 py-2 text-xs font-semibold text-[#fecdd3] transition hover:bg-[#fb7185]/20"
+            className="inline-flex items-center gap-2 rounded-md border border-[#e96f80]/35 bg-[#e96f80]/10 px-3 py-2 text-xs font-semibold text-[#ffd9df] transition hover:bg-[#e96f80]/20"
           >
             <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
             Delete campaign
@@ -426,38 +426,38 @@ function CampaignDetailPanel({
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
         <div className="space-y-4">
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <p className="text-sm leading-6 text-[#e7dfd0]">{campaign.objective}</p>
+            <p className="text-sm leading-6 text-[#edf7ff]">{campaign.objective}</p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-md bg-white/[0.05] p-3">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#c9c1ad]">Stage</p>
-                <p className="mt-2 text-sm font-semibold text-[#fffaf0]">{campaign.stage}</p>
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#a8bdd0]">Stage</p>
+                <p className="mt-2 text-sm font-semibold text-[#ffffff]">{campaign.stage}</p>
               </div>
               <div className="rounded-md bg-white/[0.05] p-3">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#c9c1ad]">Due</p>
-                <p className="mt-2 text-sm font-semibold text-[#fffaf0]">{formatShortDate(campaign.dueDate)}</p>
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#a8bdd0]">Due</p>
+                <p className="mt-2 text-sm font-semibold text-[#ffffff]">{formatShortDate(campaign.dueDate)}</p>
               </div>
             </div>
           </div>
 
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
             <ScoreMeter score={campaign.health} label="Campaign health" />
-            <p className="mt-4 text-sm leading-6 text-[#d8d2c3]">{campaign.relevance}</p>
+            <p className="mt-4 text-sm leading-6 text-[#c8d8e6]">{campaign.relevance}</p>
           </div>
 
           <div className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#fffaf0]">
-              <ListChecks className="h-4 w-4 text-[#6ee7b7]" aria-hidden="true" />
+            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#ffffff]">
+              <ListChecks className="h-4 w-4 text-[#2fb65d]" aria-hidden="true" />
               Next actions
             </div>
             <div className="space-y-2">
               {campaign.nextActions.map((action) => (
                 <div key={action.id} className="rounded-md bg-white/[0.04] p-3">
                   <div className="flex items-start justify-between gap-3">
-                    <p className="text-sm font-medium text-[#fffaf0]">{action.label}</p>
+                    <p className="text-sm font-medium text-[#ffffff]">{action.label}</p>
                     <StatusBadge label={action.status} />
                   </div>
-                  <div className="mt-2 flex items-center gap-2 text-xs text-[#c9c1ad]">
-                    <CalendarDays className="h-3.5 w-3.5 text-[#7dd3fc]" aria-hidden="true" />
+                  <div className="mt-2 flex items-center gap-2 text-xs text-[#a8bdd0]">
+                    <CalendarDays className="h-3.5 w-3.5 text-[#79c7ff]" aria-hidden="true" />
                     <span>
                       {action.owner} by {formatShortDate(action.dueDate)}
                     </span>
@@ -469,10 +469,10 @@ function CampaignDetailPanel({
         </div>
 
         <aside className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-          <p className="text-sm font-semibold text-[#fffaf0]">Target people</p>
+          <p className="text-sm font-semibold text-[#ffffff]">Target people</p>
           <div className="mt-3 space-y-2">
             {campaign.targetPeople.length === 0 ? (
-              <p className="rounded-md border border-dashed border-white/15 bg-white/[0.03] p-3 text-sm text-[#c9c1ad]">
+              <p className="rounded-md border border-dashed border-white/15 bg-white/[0.03] p-3 text-sm text-[#a8bdd0]">
                 No target people are attached yet.
               </p>
             ) : (
@@ -483,11 +483,11 @@ function CampaignDetailPanel({
                   onClick={() => onSelectPerson(person.id)}
                   className="w-full rounded-md border border-white/10 bg-white/[0.04] p-3 text-left transition hover:bg-white/10"
                 >
-                  <span className="block truncate text-sm font-semibold text-[#fffaf0]">{person.name}</span>
-                  <span className="mt-1 block truncate text-xs text-[#c9c1ad]">
+                  <span className="block truncate text-sm font-semibold text-[#ffffff]">{person.name}</span>
+                  <span className="mt-1 block truncate text-xs text-[#a8bdd0]">
                     {person.role}, {person.company}
                   </span>
-                  <span className="mt-2 block font-mono text-xs text-[#6ee7b7]">Score {person.socialEquityScore.total}</span>
+                  <span className="mt-2 block font-mono text-xs text-[#2fb65d]">Score {person.socialEquityScore.total}</span>
                 </button>
               ))
             )}

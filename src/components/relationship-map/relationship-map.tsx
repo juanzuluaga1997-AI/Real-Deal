@@ -173,7 +173,7 @@ function buildCalendarEvents(
   const visiblePeopleById = new Map(people.map((person) => [person.id, person]));
   const relationshipEvents = people.flatMap((person) => {
       const pod = podsById.get(person.podId);
-      const accentColor = pod?.color ?? "#6ee7b7";
+      const accentColor = pod?.color ?? "#2fb65d";
       const events: RelationshipCalendarEvent[] = [
         {
           id: `${person.id}-follow-up`,
@@ -225,7 +225,7 @@ function buildCalendarEvents(
           kind: "campaign-action" as const,
           label: "Campaign action",
           detail: `${campaign.title}: ${action.label}`,
-          accentColor: pod?.color ?? "#6ee7b7",
+          accentColor: pod?.color ?? "#2fb65d",
           person: actionPerson,
         },
       ];
@@ -307,12 +307,12 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
     <section className="mt-5 rounded-lg border border-white/10 bg-white/[0.035] p-4" aria-labelledby="relationship-calendar-title">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a9fff0]">Calendar</p>
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#7fe6a0]">Calendar</p>
           <div className="mt-1 flex items-center gap-2">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/10 text-[#f4c95d]">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white/10 text-[#f4bd45]">
               <CalendarDays className="h-4 w-4" aria-hidden="true" />
             </span>
-            <h3 id="relationship-calendar-title" className="text-base font-semibold text-[#fffaf0]">
+            <h3 id="relationship-calendar-title" className="text-base font-semibold text-[#ffffff]">
               Relationship calendar
             </h3>
           </div>
@@ -323,11 +323,11 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
             onClick={() => openAdjacentMonth(-1)}
             aria-label="Previous month"
             title="Previous month"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-[#c9c1ad] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-[#a8bdd0] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
           >
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           </button>
-          <div className="min-w-36 rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-center text-sm font-semibold text-[#fffaf0]">
+          <div className="min-w-36 rounded-md border border-white/10 bg-white/[0.04] px-3 py-2 text-center text-sm font-semibold text-[#ffffff]">
             {getMonthLabel(visibleMonth)}
           </div>
           <button
@@ -335,7 +335,7 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
             onClick={() => openAdjacentMonth(1)}
             aria-label="Next month"
             title="Next month"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-[#c9c1ad] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-[#a8bdd0] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
           >
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -344,7 +344,7 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
 
       <div className="mt-4 grid gap-4 2xl:grid-cols-[minmax(0,1fr)_300px]">
         <div className="min-w-0">
-          <div className="grid grid-cols-7 gap-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8f8878]">
+          <div className="grid grid-cols-7 gap-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7fa0b8]">
             {weekdayLabels.map((weekday) => (
               <span key={weekday}>{weekday}</span>
             ))}
@@ -368,20 +368,20 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
                   onClick={() => setSelectedDate(date)}
                   aria-label={`${formatLongDate(date)}, ${getEventCountLabel(dateEvents.length)}`}
                   className={cn(
-                    "flex min-h-[74px] min-w-0 flex-col rounded-md border p-2 text-left transition focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50 sm:min-h-[88px]",
+                    "flex min-h-[74px] min-w-0 flex-col rounded-md border p-2 text-left transition focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50 sm:min-h-[88px]",
                     isSelectedDate
-                      ? "border-[#6ee7b7]/60 bg-[#6ee7b7]/12"
+                      ? "border-[#2fb65d]/60 bg-[#2fb65d]/12"
                       : hasSelectedPersonEvent
-                        ? "border-[#f4c95d]/50 bg-[#f4c95d]/8 hover:bg-[#f4c95d]/12"
-                        : "border-white/10 bg-[#171510] hover:bg-white/[0.06]",
+                        ? "border-[#f4bd45]/50 bg-[#f4bd45]/8 hover:bg-[#f4bd45]/12"
+                        : "border-white/10 bg-[#001a2f] hover:bg-white/[0.06]",
                   )}
                 >
                   <span className="flex items-center justify-between gap-1">
-                    <span className="text-sm font-semibold text-[#fffaf0]">{day}</span>
+                    <span className="text-sm font-semibold text-[#ffffff]">{day}</span>
                     {isToday && (
                       <>
-                        <span className="h-2 w-2 rounded-full bg-[#6ee7b7] sm:hidden" aria-hidden="true" />
-                        <span className="hidden rounded-sm bg-[#6ee7b7]/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#d1fae5] sm:inline">
+                        <span className="h-2 w-2 rounded-full bg-[#2fb65d] sm:hidden" aria-hidden="true" />
+                        <span className="hidden rounded-sm bg-[#2fb65d]/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#dfffe8] sm:inline">
                           Today
                         </span>
                       </>
@@ -400,14 +400,14 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
                     {visibleEvents.map((event) => (
                       <span
                         key={`${date}-${event.id}`}
-                        className="inline-flex max-w-full items-center gap-1 rounded-sm bg-white/[0.06] px-1.5 py-1 text-[10px] font-semibold text-[#e7dfd0]"
+                        className="inline-flex max-w-full items-center gap-1 rounded-sm bg-white/[0.06] px-1.5 py-1 text-[10px] font-semibold text-[#edf7ff]"
                       >
                         <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: event.accentColor }} />
                         <span className="truncate">{event.person.name}</span>
                       </span>
                     ))}
                     {dateEvents.length > visibleEvents.length && (
-                      <span className="text-[10px] font-semibold text-[#a9fff0]">+{dateEvents.length - visibleEvents.length} more</span>
+                      <span className="text-[10px] font-semibold text-[#7fe6a0]">+{dateEvents.length - visibleEvents.length} more</span>
                     )}
                   </span>
                 </button>
@@ -416,9 +416,9 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
           </div>
         </div>
 
-        <aside className="rounded-lg border border-white/10 bg-[#1f1d18] p-4">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#c9c1ad]">Selected day</p>
-          <p className="mt-1 text-lg font-semibold text-[#fffaf0]">{formatLongDate(selectedDate)}</p>
+        <aside className="rounded-lg border border-white/10 bg-[#03233f] p-4">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a8bdd0]">Selected day</p>
+          <p className="mt-1 text-lg font-semibold text-[#ffffff]">{formatLongDate(selectedDate)}</p>
           <div className="mt-4 flex flex-col gap-2">
             {selectedDayEvents.length > 0 ? (
               selectedDayEvents.map((event) => (
@@ -428,22 +428,22 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
                   onClick={() => onSelectPerson(event.person.id)}
                   aria-label={`Open ${event.person.name} from calendar event`}
                   className={cn(
-                    "rounded-md border p-3 text-left transition hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50",
-                    event.person.id === selectedPersonId ? "border-[#6ee7b7]/50 bg-[#6ee7b7]/10" : "border-white/10 bg-white/[0.035]",
+                    "rounded-md border p-3 text-left transition hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50",
+                    event.person.id === selectedPersonId ? "border-[#2fb65d]/50 bg-[#2fb65d]/10" : "border-white/10 bg-white/[0.035]",
                   )}
                 >
                   <span className="flex items-start justify-between gap-2">
-                    <span className="min-w-0 truncate text-sm font-semibold text-[#fffaf0]">{event.person.name}</span>
-                    <span className="shrink-0 rounded-sm bg-white/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#c9c1ad]">
+                    <span className="min-w-0 truncate text-sm font-semibold text-[#ffffff]">{event.person.name}</span>
+                    <span className="shrink-0 rounded-sm bg-white/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#a8bdd0]">
                       {event.label}
                     </span>
                   </span>
-                  <span className="mt-1 block text-xs leading-5 text-[#a9fff0]">{event.person.company}</span>
-                  <span className="mt-2 block text-sm leading-6 text-[#e7dfd0]">{event.detail}</span>
+                  <span className="mt-1 block text-xs leading-5 text-[#7fe6a0]">{event.person.company}</span>
+                  <span className="mt-2 block text-sm leading-6 text-[#edf7ff]">{event.detail}</span>
                 </button>
               ))
             ) : (
-              <div className="rounded-md border border-dashed border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-[#c9c1ad]">
+              <div className="rounded-md border border-dashed border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-[#a8bdd0]">
                 No relationship activity is scheduled for this date.
               </div>
             )}
@@ -451,14 +451,14 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
 
           {selectedPerson && selectedPersonEvents.length > 0 && (
             <div className="mt-4 border-t border-white/10 pt-4">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#c9c1ad]">Selected relationship</p>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a8bdd0]">Selected relationship</p>
               <button
                 type="button"
                 onClick={openSelectedPersonDate}
-                className="mt-2 w-full rounded-md border border-white/10 bg-white/[0.035] p-3 text-left transition hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+                className="mt-2 w-full rounded-md border border-white/10 bg-white/[0.035] p-3 text-left transition hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
               >
-                <span className="block text-sm font-semibold text-[#fffaf0]">{selectedPerson.name}</span>
-                <span className="mt-1 block text-xs leading-5 text-[#c9c1ad]">
+                <span className="block text-sm font-semibold text-[#ffffff]">{selectedPerson.name}</span>
+                <span className="mt-1 block text-xs leading-5 text-[#a8bdd0]">
                   {selectedPersonEvents.length} calendar {selectedPersonEvents.length === 1 ? "entry" : "entries"}
                 </span>
               </button>
@@ -467,7 +467,7 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
 
           {upcomingEvents.length > 0 && (
             <div className="mt-4 border-t border-white/10 pt-4">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#c9c1ad]">Upcoming</p>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a8bdd0]">Upcoming</p>
               <div className="mt-2 flex flex-col gap-2">
                 {upcomingEvents.map((event) => (
                   <button
@@ -478,12 +478,12 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
                       setSelectedDate(event.date);
                       onSelectPerson(event.person.id);
                     }}
-                    className="flex items-start gap-2 rounded-md px-2 py-2 text-left transition hover:bg-white/[0.06] focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+                    className="flex items-start gap-2 rounded-md px-2 py-2 text-left transition hover:bg-white/[0.06] focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
                   >
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: event.accentColor }} />
                     <span className="min-w-0">
-                      <span className="block truncate text-xs font-semibold text-[#fffaf0]">{formatLongDate(event.date)}</span>
-                      <span className="mt-0.5 block truncate text-xs text-[#c9c1ad]">{event.person.name}</span>
+                      <span className="block truncate text-xs font-semibold text-[#ffffff]">{formatLongDate(event.date)}</span>
+                      <span className="mt-0.5 block truncate text-xs text-[#a8bdd0]">{event.person.name}</span>
                     </span>
                   </button>
                 ))}
@@ -556,7 +556,7 @@ function RelationshipMapComponent({
       title="Relationship map"
       className={compact ? undefined : "min-h-[660px]"}
       action={
-        <div className="flex items-center gap-2 text-xs text-[#c9c1ad]">
+        <div className="flex items-center gap-2 text-xs text-[#a8bdd0]">
           <Filter className="h-3.5 w-3.5" aria-hidden="true" />
           <span>{selectedPodName}</span>
         </div>
@@ -568,7 +568,7 @@ function RelationshipMapComponent({
           onClick={() => onSelectPod("all")}
           className={cn(
             "rounded-md border px-3 py-2 text-xs font-semibold transition",
-            selectedPodId === "all" ? "border-white/40 bg-white/15 text-white" : "border-white/10 text-[#c9c1ad] hover:bg-white/10",
+            selectedPodId === "all" ? "border-white/40 bg-white/15 text-white" : "border-white/10 text-[#a8bdd0] hover:bg-white/10",
           )}
         >
           All pods
@@ -582,7 +582,7 @@ function RelationshipMapComponent({
               "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-xs font-semibold transition",
               selectedPodId === pod.id
                 ? "border-white/40 bg-white/15 text-white"
-                : "border-white/10 text-[#c9c1ad] hover:bg-white/10",
+                : "border-white/10 text-[#a8bdd0] hover:bg-white/10",
             )}
           >
             <span className="h-2 w-2 rounded-sm" style={{ backgroundColor: pod.color }} />
@@ -592,11 +592,11 @@ function RelationshipMapComponent({
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[minmax(360px,1fr)_220px]">
-        <div className="relative min-h-[360px] overflow-hidden rounded-lg border border-white/10 bg-[#16140f] p-3 sm:min-h-[520px]">
-          <div className="absolute inset-[14%] rounded-full border border-[#6ee7b7]/24" />
-          <div className="absolute inset-[25%] rounded-full border border-[#f4c95d]/20" />
-          <div className="absolute inset-[38%] rounded-full border border-[#fb7185]/18" />
-          <div className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-center text-xs font-semibold text-[#fffaf0] shadow-2xl">
+        <div className="relative min-h-[360px] overflow-hidden rounded-lg border border-white/10 bg-[#000f1c] p-3 sm:min-h-[520px]">
+          <div className="absolute inset-[14%] rounded-full border border-[#2fb65d]/24" />
+          <div className="absolute inset-[25%] rounded-full border border-[#f4bd45]/20" />
+          <div className="absolute inset-[38%] rounded-full border border-[#e96f80]/18" />
+          <div className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-center text-xs font-semibold text-[#ffffff] shadow-2xl">
             Avery
           </div>
 
@@ -610,7 +610,7 @@ function RelationshipMapComponent({
                 onPointerDown={() => onSelectPerson(person.id)}
                 onClick={() => onSelectPerson(person.id)}
                 className={cn(
-                  "orb-glass absolute flex items-center justify-center rounded-full border text-xs font-bold text-[#11100d]",
+                  "orb-glass absolute flex items-center justify-center rounded-full border text-xs font-bold text-[#001426]",
                   isSelected ? "z-20 scale-110 border-white" : "z-10 border-white/30 hover:scale-105",
                 )}
                 style={style}
@@ -624,27 +624,27 @@ function RelationshipMapComponent({
         </div>
 
         <aside className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#c9c1ad]">Selected</p>
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#a8bdd0]">Selected</p>
           {selectedPerson ? (
             <div className="mt-3">
-              <p className="text-lg font-semibold text-[#fffaf0]">{selectedPerson.name}</p>
-              <p className="mt-1 text-sm leading-6 text-[#c9c1ad]">
+              <p className="text-lg font-semibold text-[#ffffff]">{selectedPerson.name}</p>
+              <p className="mt-1 text-sm leading-6 text-[#a8bdd0]">
                 {selectedPerson.role}, {selectedPerson.company}
               </p>
               <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
                 <div className="rounded-md bg-white/[0.05] p-3">
-                  <p className="font-mono text-xl font-semibold text-[#6ee7b7]">{selectedPerson.socialEquityScore.total}</p>
-                  <p className="text-xs text-[#c9c1ad]">Score</p>
+                  <p className="font-mono text-xl font-semibold text-[#2fb65d]">{selectedPerson.socialEquityScore.total}</p>
+                  <p className="text-xs text-[#a8bdd0]">Score</p>
                 </div>
                 <div className="rounded-md bg-white/[0.05] p-3">
-                  <p className="font-mono text-xl font-semibold text-[#f4c95d]">{selectedPerson.socialEquityScore.decayRisk}</p>
-                  <p className="text-xs text-[#c9c1ad]">Decay risk</p>
+                  <p className="font-mono text-xl font-semibold text-[#f4bd45]">{selectedPerson.socialEquityScore.decayRisk}</p>
+                  <p className="text-xs text-[#a8bdd0]">Decay risk</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-6 text-[#e7dfd0]">{selectedPerson.recommendedNextAction}</p>
+              <p className="mt-4 text-sm leading-6 text-[#edf7ff]">{selectedPerson.recommendedNextAction}</p>
             </div>
           ) : (
-            <p className="mt-3 text-sm text-[#c9c1ad]">Select a person to inspect the relationship.</p>
+            <p className="mt-3 text-sm text-[#a8bdd0]">Select a person to inspect the relationship.</p>
           )}
         </aside>
       </div>

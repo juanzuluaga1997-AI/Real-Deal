@@ -52,7 +52,7 @@ export function DashboardHistory({ snapshots, onClearHistory }: DashboardHistory
           <button
             type="button"
             onClick={onClearHistory}
-            className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#c9c1ad] transition hover:bg-white/10 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs font-semibold text-[#a8bdd0] transition hover:bg-white/10 hover:text-white"
           >
             <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
             Clear
@@ -63,12 +63,12 @@ export function DashboardHistory({ snapshots, onClearHistory }: DashboardHistory
       {snapshots.length === 0 ? (
         <div className="rounded-lg border border-dashed border-white/15 bg-white/[0.03] p-4">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10 text-[#6ee7b7]">
+            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10 text-[#2fb65d]">
               <UsersRound className="h-4 w-4" aria-hidden="true" />
             </span>
             <div>
-              <p className="text-sm font-semibold text-[#fffaf0]">No saved dashboards yet</p>
-              <p className="mt-1 text-sm text-[#c9c1ad]">
+              <p className="text-sm font-semibold text-[#ffffff]">No saved dashboards yet</p>
+              <p className="mt-1 text-sm text-[#a8bdd0]">
                 Use Save dashboard to capture the current view and all tracked people.
               </p>
             </div>
@@ -80,14 +80,14 @@ export function DashboardHistory({ snapshots, onClearHistory }: DashboardHistory
             <article key={snapshot.id} className="rounded-lg border border-white/10 bg-white/[0.035] p-4">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[#fffaf0]">
+                  <p className="text-sm font-semibold text-[#ffffff]">
                     Saved {formatSavedTime(snapshot.savedAt)}
                   </p>
-                  <p className="mt-1 text-xs text-[#c9c1ad]">
+                  <p className="mt-1 text-xs text-[#a8bdd0]">
                     Dashboard date {formatLongDate(snapshot.generatedAt)}
                   </p>
                 </div>
-                <span className="rounded-md border border-[#6ee7b7]/35 bg-[#6ee7b7]/10 px-2 py-1 text-xs font-semibold text-[#bbf7d0]">
+                <span className="rounded-md border border-[#2fb65d]/35 bg-[#2fb65d]/10 px-2 py-1 text-xs font-semibold text-[#bcf5ca]">
                   {snapshot.people.length} people captured
                 </span>
               </div>
@@ -96,14 +96,14 @@ export function DashboardHistory({ snapshots, onClearHistory }: DashboardHistory
                 <ScoreMeter score={snapshot.averageScore} label="Average score" />
                 <div className="grid gap-2 text-sm sm:grid-cols-2">
                   <div className="rounded-md bg-white/[0.04] p-3">
-                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#c9c1ad]">Selected person</p>
-                    <p className="mt-1 truncate font-semibold text-[#fffaf0]">{snapshot.selectedPersonName}</p>
-                    <p className="mt-0.5 truncate text-xs text-[#c9c1ad]">{snapshot.selectedPersonCompany}</p>
+                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#a8bdd0]">Selected person</p>
+                    <p className="mt-1 truncate font-semibold text-[#ffffff]">{snapshot.selectedPersonName}</p>
+                    <p className="mt-0.5 truncate text-xs text-[#a8bdd0]">{snapshot.selectedPersonCompany}</p>
                   </div>
                   <div className="rounded-md bg-white/[0.04] p-3">
-                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#c9c1ad]">Context</p>
-                    <p className="mt-1 truncate font-semibold text-[#fffaf0]">{snapshot.selectedCampaignTitle}</p>
-                    <p className="mt-0.5 text-xs text-[#c9c1ad]">
+                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#a8bdd0]">Context</p>
+                    <p className="mt-1 truncate font-semibold text-[#ffffff]">{snapshot.selectedCampaignTitle}</p>
+                    <p className="mt-0.5 text-xs text-[#a8bdd0]">
                       {snapshot.selectedPodName} pod, {snapshot.atRiskCount} at risk
                     </p>
                   </div>
@@ -112,7 +112,7 @@ export function DashboardHistory({ snapshots, onClearHistory }: DashboardHistory
 
               <div className="mt-3 flex flex-wrap gap-2">
                 {snapshot.people.slice(0, 6).map((person) => (
-                  <span key={person.id} className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#e7dfd0]">
+                  <span key={person.id} className="rounded-md bg-white/10 px-2 py-1 text-xs text-[#edf7ff]">
                     {person.name} {person.score}
                   </span>
                 ))}

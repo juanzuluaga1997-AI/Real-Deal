@@ -14,7 +14,7 @@ function escapeHtml(value: string): string {
 }
 
 function renderOAuthResultPage(input: { title: string; message: string; isSuccess: boolean }): NextResponse {
-  const accent = input.isSuccess ? "#6ee7b7" : "#fb7185";
+  const accent = input.isSuccess ? "#2fb65d" : "#e96f80";
   const title = escapeHtml(input.title);
   const message = escapeHtml(input.message);
   const html = `<!doctype html>
@@ -29,15 +29,15 @@ function renderOAuthResultPage(input: { title: string; message: string; isSucces
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: #11100d;
-        color: #f8f6f0;
+        background: #001426;
+        color: #ffffff;
         font-family: Arial, sans-serif;
       }
       main {
         width: min(520px, calc(100vw - 32px));
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 8px;
-        background: #1d1b17;
+        background: #031d35;
         padding: 28px;
       }
       h1 {
@@ -46,7 +46,7 @@ function renderOAuthResultPage(input: { title: string; message: string; isSucces
         font-size: 24px;
       }
       p {
-        color: #c9c1ad;
+        color: #a8bdd0;
         line-height: 1.6;
       }
       a {
@@ -54,7 +54,7 @@ function renderOAuthResultPage(input: { title: string; message: string; isSucces
         margin-top: 12px;
         border-radius: 6px;
         background: ${accent};
-        color: #11100d;
+        color: #001426;
         padding: 10px 14px;
         font-weight: 700;
         text-decoration: none;

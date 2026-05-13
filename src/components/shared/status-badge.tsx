@@ -2,17 +2,17 @@ import type { CampaignStatus, CampaignType, RecommendationUrgency } from "@/lib/
 import { cn } from "@/lib/utils/classnames";
 
 const urgencyStyles: Record<RecommendationUrgency, string> = {
-  critical: "border-[#fb7185]/40 bg-[#fb7185]/15 text-[#fecdd3]",
-  high: "border-[#f4c95d]/40 bg-[#f4c95d]/15 text-[#fde68a]",
-  medium: "border-[#7dd3fc]/40 bg-[#7dd3fc]/15 text-[#bae6fd]",
-  low: "border-[#6ee7b7]/40 bg-[#6ee7b7]/15 text-[#bbf7d0]",
+  critical: "border-[#e96f80]/40 bg-[#e96f80]/15 text-[#ffd9df]",
+  high: "border-[#f4bd45]/40 bg-[#f4bd45]/15 text-[#ffe4a0]",
+  medium: "border-[#79c7ff]/40 bg-[#79c7ff]/15 text-[#d8efff]",
+  low: "border-[#2fb65d]/40 bg-[#2fb65d]/15 text-[#bcf5ca]",
 };
 
 const campaignStatusStyles: Record<CampaignStatus, string> = {
-  active: "border-[#6ee7b7]/40 bg-[#6ee7b7]/15 text-[#bbf7d0]",
-  planning: "border-[#7dd3fc]/40 bg-[#7dd3fc]/15 text-[#bae6fd]",
-  paused: "border-[#c9c1ad]/35 bg-white/10 text-[#e7dfd0]",
-  complete: "border-[#a78bfa]/40 bg-[#a78bfa]/15 text-[#ddd6fe]",
+  active: "border-[#2fb65d]/40 bg-[#2fb65d]/15 text-[#bcf5ca]",
+  planning: "border-[#79c7ff]/40 bg-[#79c7ff]/15 text-[#d8efff]",
+  paused: "border-[#a8bdd0]/35 bg-white/10 text-[#edf7ff]",
+  complete: "border-[#5da9e9]/40 bg-[#5da9e9]/15 text-[#d7ecff]",
 };
 
 export function formatCampaignType(type: CampaignType): string {
@@ -40,7 +40,7 @@ export function StatusBadge({
 }) {
   const toneClass =
     tone === "neutral"
-      ? "border-white/15 bg-white/10 text-[#e7dfd0]"
+      ? "border-white/15 bg-white/10 text-[#edf7ff]"
       : tone in urgencyStyles
         ? urgencyStyles[tone as RecommendationUrgency]
         : campaignStatusStyles[tone as CampaignStatus];

@@ -70,7 +70,7 @@ function DailyFocusQueueComponent({
                 }}
                 className={cn(
                   "cursor-pointer rounded-lg border p-3 transition",
-                  isSelected ? "border-[#6ee7b7]/50 bg-[#6ee7b7]/10" : "border-white/10 bg-white/[0.035] hover:bg-white/[0.06]",
+                  isSelected ? "border-[#2fb65d]/50 bg-[#2fb65d]/10" : "border-white/10 bg-white/[0.035] hover:bg-white/[0.06]",
                 )}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -81,17 +81,17 @@ function DailyFocusQueueComponent({
                     className="min-w-0 text-left"
                     aria-pressed={isSelected}
                   >
-                    <span className="block truncate text-sm font-semibold text-[#fffaf0]">{person.name}</span>
-                    <span className="mt-0.5 block truncate text-xs text-[#c9c1ad]">
+                    <span className="block truncate text-sm font-semibold text-[#ffffff]">{person.name}</span>
+                    <span className="mt-0.5 block truncate text-xs text-[#a8bdd0]">
                       {person.role}, {person.company}
                     </span>
                   </button>
                   <StatusBadge label={formatUrgency(recommendation.urgency)} tone={recommendation.urgency} />
                 </div>
-                <p className="mt-3 text-sm leading-6 text-[#e7dfd0]">{recommendation.reason}</p>
+                <p className="mt-3 text-sm leading-6 text-[#edf7ff]">{recommendation.reason}</p>
                 {campaign && (
-                  <div className="mt-3 flex items-center gap-2 text-xs text-[#c9c1ad]">
-                    <Clock3 className="h-3.5 w-3.5 text-[#f4c95d]" aria-hidden="true" />
+                  <div className="mt-3 flex items-center gap-2 text-xs text-[#a8bdd0]">
+                    <Clock3 className="h-3.5 w-3.5 text-[#f4bd45]" aria-hidden="true" />
                     <span className="truncate">{campaign.title}</span>
                   </div>
                 )}
@@ -99,7 +99,7 @@ function DailyFocusQueueComponent({
                   <ScoreMeter score={person.socialEquityScore.total} label="Relationship score" />
                 </div>
                 <div className="mt-3 flex items-center justify-between gap-3">
-                  <p className="min-w-0 flex-1 text-xs leading-5 text-[#c9c1ad]">{recommendation.suggestedAction}</p>
+                  <p className="min-w-0 flex-1 text-xs leading-5 text-[#a8bdd0]">{recommendation.suggestedAction}</p>
                   <button
                     type="button"
                     onPointerDown={(event) => event.stopPropagation()}
@@ -110,8 +110,8 @@ function DailyFocusQueueComponent({
                     className={cn(
                       "inline-flex shrink-0 items-center gap-1 rounded-md px-3 py-2 text-xs font-semibold transition",
                       isPlanned
-                        ? "bg-[#6ee7b7]/20 text-[#bbf7d0]"
-                        : "bg-[#f8f6f0] text-[#11100d] hover:bg-white",
+                        ? "bg-[#2fb65d]/20 text-[#bcf5ca]"
+                        : "bg-[#ffffff] text-[#001426] hover:bg-white",
                     )}
                   >
                     <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />

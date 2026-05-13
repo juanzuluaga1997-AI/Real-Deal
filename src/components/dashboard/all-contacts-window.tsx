@@ -106,22 +106,22 @@ export function AllContactsWindow({
         aria-labelledby="all-contacts-title"
         aria-modal="true"
         role="dialog"
-        className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-white/10 bg-[#1d1b17] shadow-2xl"
+        className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-white/10 bg-[#031d35] shadow-2xl"
       >
         <div className="flex flex-col gap-4 border-b border-white/10 p-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#6ee7b7] text-[#11100d]">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#2fb65d] text-[#001426]">
                 <UsersRound className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8ff4d2]">Contacts</p>
-                <h2 id="all-contacts-title" className="text-xl font-semibold text-[#fffaf0]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#7fe6a0]">Contacts</p>
+                <h2 id="all-contacts-title" className="text-xl font-semibold text-[#ffffff]">
                   All contacts
                 </h2>
               </div>
             </div>
-            <p className="mt-3 text-sm text-[#c9c1ad]">
+            <p className="mt-3 text-sm text-[#a8bdd0]">
               {getPluralizedContactCount(people.length)} in the active relationship system.
             </p>
           </div>
@@ -130,7 +130,7 @@ export function AllContactsWindow({
             aria-label="Close all contacts"
             title="Close"
             onClick={onClose}
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/10 text-[#c9c1ad] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/10 text-[#a8bdd0] transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -151,7 +151,7 @@ export function AllContactsWindow({
           <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto_auto]">
             <div className="relative min-w-0">
               <Search
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7dd3fc]"
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#79c7ff]"
                 aria-hidden="true"
               />
               <input
@@ -161,12 +161,12 @@ export function AllContactsWindow({
                 onChange={(event) => setDraftQuery(event.target.value)}
                 placeholder="Search by name, company, role, tag, pod, campaign, or email"
                 autoComplete="off"
-                className="h-11 w-full rounded-md border border-white/10 bg-white/[0.05] px-10 text-sm text-[#fffaf0] outline-none transition placeholder:text-[#8f8878] focus:border-[#6ee7b7]/50 focus:bg-white/[0.07] focus:ring-2 focus:ring-[#6ee7b7]/20"
+                className="h-11 w-full rounded-md border border-white/10 bg-white/[0.05] px-10 text-sm text-[#ffffff] outline-none transition placeholder:text-[#7fa0b8] focus:border-[#2fb65d]/50 focus:bg-white/[0.07] focus:ring-2 focus:ring-[#2fb65d]/20"
               />
             </div>
             <button
               type="submit"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#f8f6f0] px-4 text-sm font-semibold text-[#11100d] transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-[#ffffff] px-4 text-sm font-semibold text-[#001426] transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
             >
               <Search className="h-4 w-4" aria-hidden="true" />
               Search
@@ -177,12 +177,12 @@ export function AllContactsWindow({
                 setDraftQuery("");
                 setSubmittedQuery("");
               }}
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/10 px-4 text-sm font-semibold text-[#e7dfd0] transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-white/10 px-4 text-sm font-semibold text-[#edf7ff] transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50"
             >
               Clear
             </button>
           </div>
-          <p className="mt-3 text-xs text-[#c9c1ad]" aria-live="polite">
+          <p className="mt-3 text-xs text-[#a8bdd0]" aria-live="polite">
             {activeSearch
               ? `Showing ${visiblePeople.length} of ${people.length} contacts for "${activeSearch}".`
               : `Showing all ${people.length} contacts.`}
@@ -204,53 +204,53 @@ export function AllContactsWindow({
                     aria-label={`Open ${person.name} from all contacts`}
                     onClick={() => onSelectPerson(person.id)}
                     className={cn(
-                      "min-h-[156px] rounded-md border p-4 text-left transition focus:outline-none focus:ring-2 focus:ring-[#6ee7b7]/50",
+                      "min-h-[156px] rounded-md border p-4 text-left transition focus:outline-none focus:ring-2 focus:ring-[#2fb65d]/50",
                       isSelected
-                        ? "border-[#6ee7b7]/60 bg-[#6ee7b7]/12"
+                        ? "border-[#2fb65d]/60 bg-[#2fb65d]/12"
                         : "border-white/10 bg-white/[0.04] hover:border-white/20 hover:bg-white/[0.07]",
                     )}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <UserRound className="h-4 w-4 shrink-0 text-[#f4c95d]" aria-hidden="true" />
-                          <span className="truncate text-base font-semibold text-[#fffaf0]">{person.name}</span>
+                          <UserRound className="h-4 w-4 shrink-0 text-[#f4bd45]" aria-hidden="true" />
+                          <span className="truncate text-base font-semibold text-[#ffffff]">{person.name}</span>
                         </div>
-                        <p className="mt-1 flex items-center gap-2 text-sm text-[#c9c1ad]">
-                          <Building2 className="h-3.5 w-3.5 shrink-0 text-[#8ff4d2]" aria-hidden="true" />
+                        <p className="mt-1 flex items-center gap-2 text-sm text-[#a8bdd0]">
+                          <Building2 className="h-3.5 w-3.5 shrink-0 text-[#7fe6a0]" aria-hidden="true" />
                           <span className="truncate">
                             {person.role}, {person.company}
                           </span>
                         </p>
                         {person.email && (
-                          <p className="mt-1 flex items-center gap-2 text-xs text-[#9debd1]">
+                          <p className="mt-1 flex items-center gap-2 text-xs text-[#7fe6a0]">
                             <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                             <span className="truncate">{person.email}</span>
                           </p>
                         )}
                       </div>
-                      <span className="shrink-0 rounded-md border border-white/10 bg-white/[0.05] px-2 py-1 text-sm font-semibold text-[#d1fae5]">
+                      <span className="shrink-0 rounded-md border border-white/10 bg-white/[0.05] px-2 py-1 text-sm font-semibold text-[#dfffe8]">
                         {person.socialEquityScore.total}
                       </span>
                     </div>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#e7dfd0]">
+                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#edf7ff]">
                         {podName}
                       </span>
-                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#e7dfd0]">
+                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#edf7ff]">
                         {person.category}
                       </span>
-                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#e7dfd0]">
+                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#edf7ff]">
                         {person.ring} ring
                       </span>
-                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#f4c95d]">
+                      <span className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-semibold text-[#f4bd45]">
                         {person.socialEquityScore.decayRisk} decay risk
                       </span>
                     </div>
 
-                    <p className="mt-3 line-clamp-2 text-sm text-[#c9c1ad]">{person.recommendedNextAction}</p>
-                    <p className="mt-3 truncate text-xs font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">
+                    <p className="mt-3 line-clamp-2 text-sm text-[#a8bdd0]">{person.recommendedNextAction}</p>
+                    <p className="mt-3 truncate text-xs font-semibold uppercase tracking-[0.12em] text-[#79c7ff]">
                       {campaignTitles.length > 0 ? campaignTitles.slice(0, 2).join(" | ") : "No active campaign"}
                     </p>
                   </button>
@@ -259,8 +259,8 @@ export function AllContactsWindow({
             </div>
           ) : (
             <div className="rounded-md border border-dashed border-white/10 bg-white/[0.03] p-6 text-center">
-              <p className="text-sm font-semibold text-[#fffaf0]">No contacts found.</p>
-              <p className="mt-2 text-sm text-[#c9c1ad]">Try a different name, company, role, tag, pod, campaign, or email.</p>
+              <p className="text-sm font-semibold text-[#ffffff]">No contacts found.</p>
+              <p className="mt-2 text-sm text-[#a8bdd0]">Try a different name, company, role, tag, pod, campaign, or email.</p>
             </div>
           )}
         </div>
