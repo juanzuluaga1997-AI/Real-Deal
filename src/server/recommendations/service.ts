@@ -1,7 +1,7 @@
 import { campaigns, people } from "@/lib/data/mock-data";
 import { getDailyRecommendations } from "@/lib/recommendations/daily-recommendations";
-import { DEMO_TODAY } from "@/lib/utils/dates";
+import { getCurrentAppDate } from "@/lib/utils/dates";
 
-export function getDailyFocusRecommendations(referenceDate: string | Date = DEMO_TODAY) {
+export function getDailyFocusRecommendations(referenceDate: string | Date = getCurrentAppDate()) {
   return getDailyRecommendations(people, campaigns, { referenceDate, limit: 5 });
 }

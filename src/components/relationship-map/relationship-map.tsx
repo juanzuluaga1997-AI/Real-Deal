@@ -7,7 +7,7 @@ import { CalendarDays, ChevronLeft, ChevronRight, Filter, Network } from "lucide
 import { Panel } from "@/components/shared/panel";
 import type { CampaignAction, CampaignInsight, Interaction, PersonInsight, RelationshipPod, RelationshipRing } from "@/lib/data/types";
 import { cn } from "@/lib/utils/classnames";
-import { DEMO_TODAY, formatLongDate } from "@/lib/utils/dates";
+import { formatLongDate } from "@/lib/utils/dates";
 
 interface RelationshipMapProps {
   campaigns: CampaignInsight[];
@@ -18,6 +18,7 @@ interface RelationshipMapProps {
   onSelectPerson: (personId: string) => void;
   onSelectPod: (podId: string) => void;
   compact?: boolean;
+  referenceDate: string;
 }
 
 const ringRadius: Record<RelationshipRing, number> = {
@@ -43,6 +44,7 @@ interface RelationshipCalendarProps {
   podsById: Map<string, RelationshipPod>;
   selectedPersonId: string;
   onSelectPerson: (personId: string) => void;
+  referenceDate: string;
 }
 
 type CalendarEventKind = "campaign-action" | "follow-up" | "interaction";
@@ -248,9 +250,9 @@ function getEventCountLabel(count: number): string {
   return `${count} relationship ${count === 1 ? "event" : "events"}`;
 }
 
-function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, onSelectPerson }: RelationshipCalendarProps) {
-  const [visibleMonth, setVisibleMonth] = useState(() => getMonthKey(DEMO_TODAY));
-  const [selectedDate, setSelectedDate] = useState(DEMO_TODAY);
+function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, onSelectPerson, referenceDate }: RelationshipCalendarProps) {
+  const [visibleMonth, setVisibleMonth] = useState(() => getMonthKey(referenceDate));
+  const [selectedDate, setSelectedDate] = useState(referenceDate);
 
   const events = useMemo(() => buildCalendarEvents(campaigns, people, podsById), [campaigns, people, podsById]);
   const eventsByDate = useMemo(() => {
@@ -276,10 +278,10 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
   const upcomingEvents = useMemo(
     () =>
       events
-        .filter((event) => event.date >= DEMO_TODAY)
+        .filter((event) => event.date >= referenceDate)
         .sort((firstEvent, secondEvent) => firstEvent.date.localeCompare(secondEvent.date))
         .slice(0, 4),
-    [events],
+    [events, referenceDate],
   );
 
   function openAdjacentMonth(offset: number) {
@@ -291,7 +293,7 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
   }
 
   function openSelectedPersonDate() {
-    const nextEvent = selectedPersonEvents.find((event) => event.date >= DEMO_TODAY) ?? selectedPersonEvents[0];
+    const nextEvent = selectedPersonEvents.find((event) => event.date >= referenceDate) ?? selectedPersonEvents[0];
 
     if (!nextEvent) {
       return;
@@ -355,7 +357,7 @@ function RelationshipCalendar({ campaigns, people, podsById, selectedPersonId, o
               const date = getCalendarDate(visibleMonth, day);
               const dateEvents = eventsByDate.get(date) ?? [];
               const isSelectedDate = selectedDate === date;
-              const isToday = date === DEMO_TODAY;
+              const isToday = date === referenceDate;
               const hasSelectedPersonEvent = dateEvents.some((event) => event.person.id === selectedPersonId);
               const visibleEvents = dateEvents.slice(0, 2);
 
@@ -503,6 +505,7 @@ function RelationshipMapComponent({
   onSelectPerson,
   onSelectPod,
   compact = false,
+  referenceDate,
 }: RelationshipMapProps) {
   const podsById = useMemo(() => new Map(pods.map((pod) => [pod.id, pod])), [pods]);
   const selectedPodName = selectedPodId === "all" ? "All pods" : podsById.get(selectedPodId)?.name;
@@ -651,6 +654,7 @@ function RelationshipMapComponent({
         onSelectPerson={onSelectPerson}
         people={visiblePeople}
         podsById={podsById}
+        referenceDate={referenceDate}
         selectedPersonId={selectedPersonId}
       />
     </Panel>

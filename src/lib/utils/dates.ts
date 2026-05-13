@@ -1,6 +1,34 @@
 export const DEMO_TODAY = "2026-05-11";
+export const DEFAULT_APP_TIME_ZONE = "America/New_York";
 
 const dayInMilliseconds = 24 * 60 * 60 * 1000;
+
+export function getAppDateString(value: string | Date, timeZone: string = DEFAULT_APP_TIME_ZONE): string {
+  if (typeof value === "string") {
+    return value.slice(0, 10);
+  }
+
+  const dateParts = new Intl.DateTimeFormat("en-US", {
+    day: "2-digit",
+    month: "2-digit",
+    timeZone,
+    year: "numeric",
+  })
+    .formatToParts(value)
+    .reduce<Record<string, string>>((parts, part) => {
+      if (part.type !== "literal") {
+        parts[part.type] = part.value;
+      }
+
+      return parts;
+    }, {});
+
+  return `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+}
+
+export function getCurrentAppDate(timeZone: string = DEFAULT_APP_TIME_ZONE): string {
+  return getAppDateString(new Date(), timeZone);
+}
 
 export function toUtcDay(value: string | Date): number {
   if (typeof value === "string") {

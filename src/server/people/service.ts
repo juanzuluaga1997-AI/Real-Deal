@@ -2,13 +2,13 @@ import { explainSocialEquityScore, suggestNextAction, summarizeRelationshipHisto
 import { campaigns, people } from "@/lib/data/mock-data";
 import type { PersonInsight } from "@/lib/data/types";
 import { calculateSocialEquityScore } from "@/lib/scoring/social-equity-score";
-import { DEMO_TODAY } from "@/lib/utils/dates";
+import { getCurrentAppDate } from "@/lib/utils/dates";
 
 export function getPeople(): typeof people {
   return people;
 }
 
-export async function getPeopleWithInsights(referenceDate: string | Date = DEMO_TODAY): Promise<PersonInsight[]> {
+export async function getPeopleWithInsights(referenceDate: string | Date = getCurrentAppDate()): Promise<PersonInsight[]> {
   return Promise.all(
     people.map(async (person) => {
       const socialEquityScore = calculateSocialEquityScore(person, campaigns, referenceDate);

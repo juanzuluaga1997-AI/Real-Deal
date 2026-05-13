@@ -706,6 +706,7 @@ export function FounderWorkspace({
                 onSelectPod={handleSelectPod}
                 people={workspacePeople}
                 pods={pods}
+                referenceDate={generatedAt}
                 selectedPersonId={deferredMapSelectedPersonId}
                 selectedPodId={selectedPodId}
               />
@@ -736,6 +737,7 @@ export function FounderWorkspace({
               onSelectPod={handleSelectPod}
               people={workspacePeople}
               pods={pods}
+              referenceDate={generatedAt}
               selectedPersonId={selectedPerson?.id ?? ""}
               selectedPodId={selectedPodId}
             />

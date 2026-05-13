@@ -1,6 +1,6 @@
 import { founderProfile } from "@/lib/data/mock-data";
 import type { CampaignInsight, PersonInsight } from "@/lib/data/types";
-import { DEMO_TODAY } from "@/lib/utils/dates";
+import { getAppDateString, getCurrentAppDate } from "@/lib/utils/dates";
 import { getCampaignsWithPeople } from "@/server/campaigns/service";
 import { getPeopleWithInsights } from "@/server/people/service";
 import { getDailyFocusRecommendations } from "@/server/recommendations/service";
@@ -50,14 +50,14 @@ function enrichRecommendations(
   });
 }
 
-export async function getDashboardReport(referenceDate: string | Date = DEMO_TODAY): Promise<DashboardReport> {
+export async function getDashboardReport(referenceDate: string | Date = getCurrentAppDate()): Promise<DashboardReport> {
   const people = await getPeopleWithInsights(referenceDate);
   const campaigns = getCampaignsWithPeople(people);
   const recommendations = getDailyFocusRecommendations(referenceDate);
 
   return {
     title: "Real Deal Relationship Report",
-    generatedAt: typeof referenceDate === "string" ? referenceDate : referenceDate.toISOString().slice(0, 10),
+    generatedAt: getAppDateString(referenceDate),
     founder: founderProfile,
     health: getHealthOverview(people, campaigns),
     recommendations: enrichRecommendations(recommendations, people, campaigns),

@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description: "Dashboard relationship report for Real Deal.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ReportPage() {
   const report = await getDashboardReport();
 
