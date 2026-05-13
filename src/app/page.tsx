@@ -9,7 +9,8 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
-  const generatedAt = getCurrentAppDate(process.env.REAL_DEAL_TIME_ZONE ?? DEFAULT_APP_TIME_ZONE);
+  const appTimeZone = process.env.REAL_DEAL_TIME_ZONE ?? DEFAULT_APP_TIME_ZONE;
+  const generatedAt = getCurrentAppDate(appTimeZone);
   const people = await getPeopleWithInsights(generatedAt);
   const campaigns = getCampaignsWithPeople(people);
   const recommendations = getDailyFocusRecommendations(generatedAt);
@@ -18,6 +19,7 @@ export default async function Home() {
     <FounderWorkspace
       campaigns={campaigns}
       founder={founderProfile}
+      appTimeZone={appTimeZone}
       generatedAt={generatedAt}
       people={people}
       pods={pods}

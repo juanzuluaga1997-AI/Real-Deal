@@ -29,13 +29,14 @@ import {
 import { buildImportedRelationshipState } from "@/lib/import/relationship-import-adapter";
 import { buildEmailEnrichedRelationshipState } from "@/lib/email/relationship-email-sync";
 import { cn } from "@/lib/utils/classnames";
-import { formatLongDate } from "@/lib/utils/dates";
+import { DEFAULT_APP_TIME_ZONE, formatLongDate, hasAppDateChanged } from "@/lib/utils/dates";
 import type { ImportResult } from "@/lib/import/types";
 import type { EmailSyncResult } from "@/lib/email/types";
 
 type WorkspaceView = "dashboard" | "map" | "campaigns";
 
 interface FounderWorkspaceProps {
+  appTimeZone?: string;
   founder: FounderProfile;
   people: PersonInsight[];
   pods: RelationshipPod[];
@@ -57,6 +58,7 @@ const manualCampaignsStorageKey = "real-deal:manual-campaigns";
 const deletedCampaignsStorageKey = "real-deal:deleted-campaigns";
 
 export function FounderWorkspace({
+  appTimeZone = DEFAULT_APP_TIME_ZONE,
   founder,
   people,
   pods,
@@ -265,6 +267,25 @@ export function FounderWorkspace({
 
     return () => window.clearTimeout(loadLocalStateTimer);
   }, []);
+
+  useEffect(() => {
+    function refreshIfAppDateChanged() {
+      if (hasAppDateChanged(generatedAt, new Date(), appTimeZone)) {
+        window.location.reload();
+      }
+    }
+
+    const dailyRefreshInterval = window.setInterval(refreshIfAppDateChanged, 60_000);
+
+    window.addEventListener("focus", refreshIfAppDateChanged);
+    document.addEventListener("visibilitychange", refreshIfAppDateChanged);
+
+    return () => {
+      window.clearInterval(dailyRefreshInterval);
+      window.removeEventListener("focus", refreshIfAppDateChanged);
+      document.removeEventListener("visibilitychange", refreshIfAppDateChanged);
+    };
+  }, [appTimeZone, generatedAt]);
 
   const handleSelectCampaign = useCallback((campaignId: string) => {
     setSelectedCampaignId(campaignId);

@@ -30,6 +30,10 @@ export function getCurrentAppDate(timeZone: string = DEFAULT_APP_TIME_ZONE): str
   return getAppDateString(new Date(), timeZone);
 }
 
+export function hasAppDateChanged(renderedAppDate: string, currentDate: Date = new Date(), timeZone: string = DEFAULT_APP_TIME_ZONE): boolean {
+  return getAppDateString(currentDate, timeZone) !== renderedAppDate;
+}
+
 export function toUtcDay(value: string | Date): number {
   if (typeof value === "string") {
     return Date.parse(`${value}T00:00:00.000Z`);
