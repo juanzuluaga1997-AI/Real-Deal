@@ -28,6 +28,7 @@ Migration path:
 
 ```text
 supabase/migrations/0001_real_deal_schema.sql
+supabase/migrations/0002_workspace_state.sql
 ```
 
 ## Lovable Setup Steps
@@ -60,6 +61,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 - `import_batches`: structured records of contact uploads and parsing results.
 - `email_sync_runs`: Gmail sync audit trail.
 - `saved_dashboard_snapshots`: durable dashboard history.
+- `workspace_state`: single-workspace persistence used by the current Vercel app while the deeper row-by-row Supabase model is wired in.
 
 ## Deferred Work
 
@@ -68,7 +70,7 @@ The migration prepares persistence, but these implementation steps should happen
 - Replace localStorage manual campaign persistence with Supabase writes.
 - Store imported people and campaign relationships in Supabase.
 - Store Gmail sync results as `interactions` rows.
+- Split `workspace_state` JSON persistence into normalized table writes once multi-user authentication is ready.
 - Add authenticated workspace routing.
 - Add seed and backup scripts.
 - Add integration tests that run against a disposable Supabase test database.
-

@@ -13,6 +13,7 @@ Current source of truth:
 - Production reference: https://real-deal-xi.vercel.app
 - Product handoff docs: docs/lovable-transition.md
 - Supabase schema: supabase/migrations/0001_real_deal_schema.sql
+- Supabase workspace persistence bridge: supabase/migrations/0002_workspace_state.sql
 
 Important GitHub safety rule:
 There is a separate app named AIssistant in the same GitHub/Vercel ecosystem. Do not delete, rename, overwrite, or reuse anything from AIssistant. Real Deal must have its own project, repository, database, and deployment path.
@@ -91,4 +92,3 @@ Before making improvements, first recreate the existing Real Deal behavior. Conf
 - Save dashboard history.
 - Open and generate reports.
 ```
-

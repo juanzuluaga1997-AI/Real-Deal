@@ -76,6 +76,8 @@ This repo includes a first migration at `supabase/migrations/0001_real_deal_sche
 - Gmail sync runs.
 - Saved dashboard snapshots.
 
+It also includes `supabase/migrations/0002_workspace_state.sql`, which supports the current Vercel app's single-workspace persistence bridge while the deeper normalized Supabase model is introduced.
+
 The current runtime is not forced to depend on Supabase yet. That keeps the existing local, GitHub, and Vercel app stable until a Supabase project URL and keys are available.
 
 ## Required Environment Variables For A Supabase Build
@@ -104,4 +106,3 @@ Keep service-role keys server-side only. Never expose them in client components,
 - Supabase policies prevent unrelated users from reading each other's relationship data.
 - The UI remains coherent with the current Trolley-inspired design system.
 - The current GitHub repo and Vercel project for AIssistant are not touched.
-

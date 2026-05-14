@@ -5,27 +5,9 @@ import { History, Trash2, UsersRound } from "lucide-react";
 import { Panel } from "@/components/shared/panel";
 import { ScoreMeter } from "@/components/shared/score-meter";
 import { formatLongDate } from "@/lib/utils/dates";
+import type { SavedDashboardSnapshot } from "@/lib/workspace-state/types";
 
-export interface SavedDashboardSnapshot {
-  id: string;
-  savedAt: string;
-  generatedAt: string;
-  selectedPersonName: string;
-  selectedPersonCompany: string;
-  selectedCampaignTitle: string;
-  selectedPodName: string;
-  plannedTouchCount: number;
-  recommendationCount: number;
-  averageScore: number;
-  atRiskCount: number;
-  people: Array<{
-    id: string;
-    name: string;
-    company: string;
-    score: number;
-    decayRisk: number;
-  }>;
-}
+export type { SavedDashboardSnapshot };
 
 interface DashboardHistoryProps {
   snapshots: SavedDashboardSnapshot[];

@@ -32,6 +32,7 @@ import { cn } from "@/lib/utils/classnames";
 import { DEFAULT_APP_TIME_ZONE, formatLongDate, hasAppDateChanged } from "@/lib/utils/dates";
 import type { ImportResult } from "@/lib/import/types";
 import type { EmailSyncResult } from "@/lib/email/types";
+import type { WorkspaceState } from "@/lib/workspace-state/types";
 
 type WorkspaceView = "dashboard" | "map" | "campaigns";
 
@@ -56,6 +57,73 @@ const importedContactsStorageKey = "real-deal:imported-contacts-history";
 const gmailSyncStorageKey = "real-deal:gmail-email-sync-history";
 const manualCampaignsStorageKey = "real-deal:manual-campaigns";
 const deletedCampaignsStorageKey = "real-deal:deleted-campaigns";
+
+function parseStorageArray<T>(value: string | null): T[] {
+  if (!value) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? (parsed as T[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function parseStorageObject<T>(value: string | null): T | null {
+  if (!value) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? (parsed as T) : null;
+  } catch {
+    return null;
+  }
+}
+
+function readLocalWorkspaceState(): WorkspaceState {
+  const parsedGmailSync = parseStorageObject<EmailSyncResult>(window.localStorage.getItem(gmailSyncStorageKey));
+
+  return {
+    savedDashboards: parseStorageArray<SavedDashboardSnapshot>(window.localStorage.getItem(savedDashboardsStorageKey)),
+    importHistory: parseStorageArray<ImportResult>(window.localStorage.getItem(importedContactsStorageKey)),
+    emailSyncResult:
+      parsedGmailSync?.sourceName === "Gmail" && Array.isArray(parsedGmailSync.events) ? parsedGmailSync : null,
+    manualCampaigns: parseStorageArray<CampaignInsight>(window.localStorage.getItem(manualCampaignsStorageKey)),
+    deletedCampaignIds: parseStorageArray<string>(window.localStorage.getItem(deletedCampaignsStorageKey)).filter(
+      (campaignId) => typeof campaignId === "string",
+    ),
+  };
+}
+
+function writeLocalWorkspaceStatePatch(patch: Partial<WorkspaceState>) {
+  if (patch.savedDashboards) {
+    window.localStorage.setItem(savedDashboardsStorageKey, JSON.stringify(patch.savedDashboards));
+  }
+
+  if (patch.importHistory) {
+    window.localStorage.setItem(importedContactsStorageKey, JSON.stringify(patch.importHistory));
+  }
+
+  if (Object.prototype.hasOwnProperty.call(patch, "emailSyncResult")) {
+    if (patch.emailSyncResult) {
+      window.localStorage.setItem(gmailSyncStorageKey, JSON.stringify(patch.emailSyncResult));
+    } else {
+      window.localStorage.removeItem(gmailSyncStorageKey);
+    }
+  }
+
+  if (patch.manualCampaigns) {
+    window.localStorage.setItem(manualCampaignsStorageKey, JSON.stringify(patch.manualCampaigns));
+  }
+
+  if (patch.deletedCampaignIds) {
+    window.localStorage.setItem(deletedCampaignsStorageKey, JSON.stringify(patch.deletedCampaignIds));
+  }
+}
 
 export function FounderWorkspace({
   appTimeZone = DEFAULT_APP_TIME_ZONE,
@@ -217,56 +285,88 @@ export function FounderWorkspace({
   }, [contactSearchQuery, podNameById, workspacePeople]);
   const shouldShowContactSearchResults = isContactSearchFocused && contactSearchQuery.trim().length > 0;
 
+  const applyWorkspaceState = useCallback((state: WorkspaceState, source: "local" | "supabase") => {
+    setSavedDashboards(state.savedDashboards);
+    setImportHistory(state.importHistory);
+    setEmailSyncResult(state.emailSyncResult);
+    setManualCampaigns(state.manualCampaigns);
+    setDeletedCampaignIds(state.deletedCampaignIds);
+
+    if (source === "local") {
+      setSaveStatus(
+        state.savedDashboards.length > 0
+          ? `${state.savedDashboards.length} saved dashboard${state.savedDashboards.length === 1 ? "" : "s"} in history.`
+          : "No dashboard saved in this browser yet.",
+      );
+      return;
+    }
+
+    const savedItemCount =
+      state.savedDashboards.length +
+      state.importHistory.length +
+      state.manualCampaigns.length +
+      state.deletedCampaignIds.length +
+      (state.emailSyncResult ? 1 : 0);
+
+    if (savedItemCount > 0) {
+      setSaveStatus("Supabase workspace state loaded.");
+    }
+  }, []);
+
+  const persistWorkspaceState = useCallback((patch: Partial<WorkspaceState>) => {
+    writeLocalWorkspaceStatePatch(patch);
+
+    void fetch("/api/workspace-state", {
+      method: "PUT",
+      body: JSON.stringify({ state: patch }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).catch(() => {
+      // Local storage remains the offline fallback when Supabase is unavailable.
+    });
+  }, []);
+
   useEffect(() => {
     const loadLocalStateTimer = window.setTimeout(() => {
       try {
-        const storedHistory = window.localStorage.getItem(savedDashboardsStorageKey);
-        if (storedHistory) {
-          const parsedHistory = JSON.parse(storedHistory) as SavedDashboardSnapshot[];
-          if (Array.isArray(parsedHistory)) {
-            setSavedDashboards(parsedHistory);
-            setSaveStatus(`${parsedHistory.length} saved dashboard${parsedHistory.length === 1 ? "" : "s"} in history.`);
-          }
-        }
+        applyWorkspaceState(readLocalWorkspaceState(), "local");
 
-        const storedImports = window.localStorage.getItem(importedContactsStorageKey);
-        if (storedImports) {
-          const parsedImports = JSON.parse(storedImports) as ImportResult[];
-          if (Array.isArray(parsedImports)) {
-            setImportHistory(parsedImports);
-          }
-        }
+        void fetch("/api/workspace-state")
+          .then(async (response) => {
+            if (!response.ok) {
+              return;
+            }
 
-        const storedGmailSync = window.localStorage.getItem(gmailSyncStorageKey);
-        if (storedGmailSync) {
-          const parsedGmailSync = JSON.parse(storedGmailSync) as EmailSyncResult;
-          if (parsedGmailSync?.sourceName === "Gmail" && Array.isArray(parsedGmailSync.events)) {
-            setEmailSyncResult(parsedGmailSync);
-          }
-        }
+            const payload = (await response.json()) as { persistence?: { configured?: boolean }; state?: WorkspaceState };
 
-        const storedManualCampaigns = window.localStorage.getItem(manualCampaignsStorageKey);
-        if (storedManualCampaigns) {
-          const parsedManualCampaigns = JSON.parse(storedManualCampaigns) as CampaignInsight[];
-          if (Array.isArray(parsedManualCampaigns)) {
-            setManualCampaigns(parsedManualCampaigns);
-          }
-        }
+            if (!payload.persistence?.configured || !payload.state) {
+              return;
+            }
 
-        const storedDeletedCampaigns = window.localStorage.getItem(deletedCampaignsStorageKey);
-        if (storedDeletedCampaigns) {
-          const parsedDeletedCampaigns = JSON.parse(storedDeletedCampaigns) as string[];
-          if (Array.isArray(parsedDeletedCampaigns)) {
-            setDeletedCampaignIds(parsedDeletedCampaigns.filter((campaignId) => typeof campaignId === "string"));
-          }
-        }
+            const cloudState: WorkspaceState = {
+              savedDashboards: Array.isArray(payload.state.savedDashboards) ? payload.state.savedDashboards : [],
+              importHistory: Array.isArray(payload.state.importHistory) ? payload.state.importHistory : [],
+              emailSyncResult: payload.state.emailSyncResult ?? null,
+              manualCampaigns: Array.isArray(payload.state.manualCampaigns) ? payload.state.manualCampaigns : [],
+              deletedCampaignIds: Array.isArray(payload.state.deletedCampaignIds)
+                ? payload.state.deletedCampaignIds.filter((campaignId) => typeof campaignId === "string")
+                : [],
+            };
+
+            writeLocalWorkspaceStatePatch(cloudState);
+            applyWorkspaceState(cloudState, "supabase");
+          })
+          .catch(() => {
+            // Local storage remains usable when cloud persistence is not configured.
+          });
       } catch {
         setSaveStatus("Saved dashboard history could not be loaded.");
       }
     }, 0);
 
     return () => window.clearTimeout(loadLocalStateTimer);
-  }, []);
+  }, [applyWorkspaceState]);
 
   useEffect(() => {
     function refreshIfAppDateChanged() {
@@ -329,13 +429,13 @@ export function FounderWorkspace({
 
   const persistManualCampaigns = useCallback((nextCampaigns: CampaignInsight[]) => {
     setManualCampaigns(nextCampaigns);
-    window.localStorage.setItem(manualCampaignsStorageKey, JSON.stringify(nextCampaigns));
-  }, []);
+    persistWorkspaceState({ manualCampaigns: nextCampaigns });
+  }, [persistWorkspaceState]);
 
   const persistDeletedCampaignIds = useCallback((nextDeletedCampaignIds: string[]) => {
     setDeletedCampaignIds(nextDeletedCampaignIds);
-    window.localStorage.setItem(deletedCampaignsStorageKey, JSON.stringify(nextDeletedCampaignIds));
-  }, []);
+    persistWorkspaceState({ deletedCampaignIds: nextDeletedCampaignIds });
+  }, [persistWorkspaceState]);
 
   const handleCreateCampaign = useCallback(
     (input: ManualCampaignInput) => {
@@ -376,8 +476,8 @@ export function FounderWorkspace({
 
   const persistDashboardHistory = useCallback((nextHistory: SavedDashboardSnapshot[]) => {
     setSavedDashboards(nextHistory);
-    window.localStorage.setItem(savedDashboardsStorageKey, JSON.stringify(nextHistory));
-  }, []);
+    persistWorkspaceState({ savedDashboards: nextHistory });
+  }, [persistWorkspaceState]);
 
   const handleSaveDashboard = useCallback(() => {
     if (!selectedPerson || !selectedCampaign) {
@@ -430,7 +530,7 @@ export function FounderWorkspace({
   const handleImportedContacts = useCallback((result: ImportResult) => {
     setImportHistory((currentHistory) => {
       const nextHistory = [result, ...currentHistory].slice(0, 10);
-      window.localStorage.setItem(importedContactsStorageKey, JSON.stringify(nextHistory));
+      persistWorkspaceState({ importHistory: nextHistory });
       return nextHistory;
     });
     const firstImportedContact = result.contacts[0];
@@ -443,20 +543,20 @@ export function FounderWorkspace({
     setSaveStatus(
       `Imported ${result.summary.contactsImported} contact${result.summary.contactsImported === 1 ? "" : "s"} into the active relationship system.`,
     );
-  }, [selectedCampaignId]);
+  }, [persistWorkspaceState, selectedCampaignId]);
 
   const handleClearImportHistory = useCallback(() => {
     setImportHistory([]);
-    window.localStorage.removeItem(importedContactsStorageKey);
-  }, []);
+    persistWorkspaceState({ importHistory: [] });
+  }, [persistWorkspaceState]);
 
   const handleGmailSynced = useCallback((result: EmailSyncResult) => {
     setEmailSyncResult(result);
-    window.localStorage.setItem(gmailSyncStorageKey, JSON.stringify(result));
+    persistWorkspaceState({ emailSyncResult: result });
     setSaveStatus(
       `Synced ${result.summary.messagesImported} Gmail email${result.summary.messagesImported === 1 ? "" : "s"} into relationship history.`,
     );
-  }, []);
+  }, [persistWorkspaceState]);
 
   return (
     <main className="app-shell min-h-screen px-3 py-4 text-[#ffffff] sm:px-5 lg:px-6">

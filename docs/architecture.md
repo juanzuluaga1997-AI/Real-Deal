@@ -45,3 +45,5 @@ Gmail sync is isolated under `src/server/integrations/gmail`, `src/app/api/integ
 ## Lovable And Supabase Handoff
 
 The current app does not require Supabase to run. The Lovable handoff adds `docs/lovable-transition.md`, `docs/prompts/lovable-master-prompt.md`, `docs/supabase-transition-plan.md`, and `supabase/migrations/0001_real_deal_schema.sql` so a future Lovable build can add durable storage without weakening the existing prototype. Supabase should become the persistence layer for authenticated founder workspaces, imported relationships, campaign state, Gmail-derived interactions, and saved dashboard snapshots once a dedicated Supabase project exists.
+
+The first production persistence bridge uses `/api/workspace-state`, `src/server/supabase`, and `supabase/migrations/0002_workspace_state.sql`. It stores the current single-workspace state as JSON in Supabase while preserving browser local storage as an offline fallback. This keeps the Vercel app stable now and gives Lovable a clean path to normalize those writes into the table model later.

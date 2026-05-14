@@ -10,6 +10,7 @@ Real Deal is a relationship operating system for highly connected founders. It h
 - Tailwind CSS
 - lucide-react
 - Local structured mock data
+- Optional Supabase workspace persistence
 - Deterministic AI mock services
 - Dashboard report output as PDF, email, and HTML
 - Vitest and Testing Library
@@ -41,6 +42,7 @@ Open [http://localhost:3000](http://localhost:3000) after starting the developme
 - `src/server`: Server-side data services used by pages and API routes.
 - `src/server/reports`: Report composition, PDF generation, and email delivery boundary.
 - `src/server/integrations/gmail`: Gmail read-only sync boundary for relationship email history.
+- `src/server/supabase`: Server-side Supabase clients and workspace persistence.
 - `tests`: Scoring, recommendation, API, and UI behavior tests.
 - `docs`: Architecture notes.
 - `config`: Product configuration.
@@ -84,6 +86,15 @@ For local setup:
 After Google authorization, Real Deal stores the refresh token in `config/private/gmail-oauth-token.json`, which is ignored by git. `GMAIL_REFRESH_TOKEN` is still supported for manual or hosted setups. Without OAuth credentials, the app runs deterministic demo sync data so the relationship history workflow remains testable. See `config/gmail.example.env` for the supported environment names.
 
 Synced Gmail activity appears inside each person's detail panel in a dedicated Email history section. Sent and received messages show direction, subject, date, and the synced snippet so the relationship record stays attached to the correct contact.
+
+## Supabase Persistence
+
+The app can run without Supabase and will keep using browser local storage as a fallback. When `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are configured, `/api/workspace-state` mirrors workspace state into Supabase through server-side API routes. This persists imported contact history, Gmail sync results, manual campaigns, deleted campaign ids, and saved dashboard snapshots without exposing privileged keys to the browser.
+
+Run both Supabase migrations before enabling hosted persistence:
+
+- `supabase/migrations/0001_real_deal_schema.sql`
+- `supabase/migrations/0002_workspace_state.sql`
 
 ## GitHub Readiness
 

@@ -17,6 +17,7 @@
     "verify:ui": "node scripts/verify-ui.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
     "exceljs": "^4.4.0",
     "jszip": "^3.10.1",
     "lucide-react": "^1.14.0",
