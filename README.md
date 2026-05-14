@@ -44,6 +44,7 @@ Open [http://localhost:3000](http://localhost:3000) after starting the developme
 - `tests`: Scoring, recommendation, API, and UI behavior tests.
 - `docs`: Architecture notes.
 - `config`: Product configuration.
+- `supabase`: Optional Supabase migrations for the Lovable production handoff.
 - `.github/workflows`: GitHub Actions quality checks.
 
 ## AI Behavior
@@ -87,3 +88,9 @@ Synced Gmail activity appears inside each person's detail panel in a dedicated E
 ## GitHub Readiness
 
 The repository is prepared for GitHub with CI, an environment template, contribution guidance, and security guidance. Before uploading, review `docs/github-readiness.md`, run `npm run verify`, and confirm that `.env.local`, `config/private`, `.verification`, `.next`, and `node_modules` are not included.
+
+## Lovable Transition
+
+Real Deal is prepared for a careful Lovable handoff without replacing the current working app. Start with `docs/lovable-transition.md`, paste `docs/prompts/lovable-master-prompt.md` into a new Lovable project, and use `supabase/migrations/0001_real_deal_schema.sql` if the Lovable version needs durable Supabase storage.
+
+The existing GitHub repository remains the source of truth unless a reviewed migration intentionally replaces it. Do not overwrite the separate AIssistant app, repository, or Vercel project.

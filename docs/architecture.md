@@ -14,6 +14,7 @@ Real Deal is structured as a Next.js App Router application with a clear split b
 - `src/server/reports`: Dashboard report composition, PDF generation, and deterministic email delivery.
 - `tests`: Unit, API, and UI behavior tests.
 - `config`: Product-level configuration for demo settings.
+- `supabase`: Optional Lovable handoff migrations for durable production persistence.
 
 ## AI Layer
 
@@ -40,3 +41,7 @@ Contact imports are handled by `src/app/api/imports/contacts/route.ts`, `src/ser
 The dashboard uses `src/lib/import/relationship-import-adapter.ts` to turn import results into active relationship state. Imported records become `PersonInsight` objects, detected campaign names become active campaign records when they do not already exist, campaign target lists are merged, and the Daily Focus Queue is recomputed against the combined base and imported relationship graph. This keeps 1,000+ imported contacts visible in the map, person detail panel, campaigns workspace, saved dashboard snapshots, and recommendation engine instead of leaving them as a static preview. Private Google files require OAuth later.
 
 Gmail sync is isolated under `src/server/integrations/gmail`, `src/app/api/integrations/gmail`, and `src/lib/email`. The app uses a first-party Google OAuth flow through `/api/integrations/gmail/connect` and `/api/integrations/gmail/callback`, requests the read-only Gmail scope, and stores the refresh token in a git-ignored private local file by default. Environment-based refresh tokens are still supported for manual or hosted deployments. The server never stores a mailbox address in source code. The sync service normalizes message metadata into `ContactEmailEvent` records, and the client enrichment layer adds those events to each matching relationship timeline, notes, recency, interaction frequency, responsiveness, history strength, score, and daily recommendations. When OAuth credentials are missing, deterministic demo Gmail events are returned so the product flow remains usable and testable without personal data.
+
+## Lovable And Supabase Handoff
+
+The current app does not require Supabase to run. The Lovable handoff adds `docs/lovable-transition.md`, `docs/prompts/lovable-master-prompt.md`, `docs/supabase-transition-plan.md`, and `supabase/migrations/0001_real_deal_schema.sql` so a future Lovable build can add durable storage without weakening the existing prototype. Supabase should become the persistence layer for authenticated founder workspaces, imported relationships, campaign state, Gmail-derived interactions, and saved dashboard snapshots once a dedicated Supabase project exists.
